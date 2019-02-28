@@ -19,3 +19,4 @@ java -jar build/libs/gs-spring-boot-docker-0.1.0.jar
 
 All source code should be stored in the src/ directory. 
 
+* Dev: The build directory is ignored by the .gitignore file, therefore the directory will not be uploaded onto the git repository.
