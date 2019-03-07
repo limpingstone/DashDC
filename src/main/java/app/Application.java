@@ -1,4 +1,4 @@
-package hello;
+package app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +11,7 @@ public class Application {
 
     @RequestMapping("/")
     public String home() {
-        return "Hello Dash DC!";
+        return "Hello Docker World";
     }
 
     public static void main(String[] args) {
