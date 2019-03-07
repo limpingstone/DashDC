@@ -42,4 +42,8 @@ public class Console {
     public void exit() {
 
     }
+
+    public void uninstall() {
+
+    }
 }
