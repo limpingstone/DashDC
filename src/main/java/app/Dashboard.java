@@ -1,3 +1,34 @@
-public class Dashboard {
+package app;
 
+import java.util.List;
+import java.util.ArrayList;
+
+public class Dashboard {
+    private List<Page> pageList;
+
+    public Dashboard() {
+	pageList = new ArrayList<Page>();
+    }
+
+    // returns a list of page objects
+    public List<Page> getPages() {
+	return pageList;
+    }
+
+    // returns a list of page names
+    public List<String> getPageNames() {
+	List<String> names = new ArrayList<String>();
+	for ( int i = 0; i < pageList.size(); i++ ) {
+	    names.add(pageList.get(i).getName());
+	}
+	return names;
+
+    }
+
+    // creates a new page on the dashboard w/ the specified name and id
+    public void addPage(int id, String name) {
+	Page newPage = new Page(id, name);
+	pageList.add(newPage);
+    }
+	
 }

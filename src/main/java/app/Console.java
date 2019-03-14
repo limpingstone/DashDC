@@ -1,3 +1,4 @@
+package app;
 public class Console {
     public void open() {
 
