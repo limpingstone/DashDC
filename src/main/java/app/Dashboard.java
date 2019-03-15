@@ -25,6 +25,15 @@ public class Dashboard {
 
     }
 
+    // returns the page object with specified id
+    public Page getDashboardPage(int id) {
+	for ( int i = 0; i < pageList.size(); i++ ) {
+	    if ( id == pageList.get(i).getId() )
+		return pageList.get(i);
+	}
+	return null; // should be an error if not found
+    }
+    
     // creates a new page on the dashboard w/ the specified name and id
     public void addPage(int id, String name) {
 	Page newPage = new Page(id, name);
