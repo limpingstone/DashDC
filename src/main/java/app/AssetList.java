@@ -1,3 +1,6 @@
-public class AssetList extends Asset{
-    
+public class AssetList extends DashboardAsset{
+    @Override
+    public String display(){
+        return null;
+    }
 }
