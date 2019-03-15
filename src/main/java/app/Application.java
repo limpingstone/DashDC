@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 public class Application {
 
+
     private static Dashboard dashboard;
     private static Page currentPage; // current page the viewer is seeing
     // may be unnecessary
@@ -20,9 +21,9 @@ public class Application {
     //    private static Asset currentAsset;
     
     @RequestMapping("/")
-    public String home() {
-
-	String retStr = "Here are the pages that currently exist. Select one: <br>";
+    public String dash() {
+	String retStr = "<h1>User Dashboard</h1>";
+	retStr = "Here are the pages that currently exist. Select one: <br>";
 	retStr += "<form action='page' method='post'>";
 	retStr += "<select name='id'>"; // page id
 	List<Page> pages = dashboard.getPages();
@@ -45,7 +46,7 @@ public class Application {
     @RequestMapping("/newpage")
     public String newPage(@ModelAttribute FormCapture form) {
 	dashboard.addPage(form.getId(), form.getName());
-	return home();
+	return dash();
     }
 
     @RequestMapping("/page")
@@ -84,6 +85,19 @@ public class Application {
 	Application.dashboard = new Dashboard();
     }
     
+    
+    @RequestMapping("/control-panel")
+    public String controlPanel(){
+        return "<h1>Control panel</h1>";
+    }
+
+    @RequestMapping("/customization-tool")
+    public String customizationTool(){
+        return "<h1>Customization tool</h1>";
+    }
+
+    /*  Launching the application   */
+
     public static void main(String[] args) {
 	Application.setup();
         SpringApplication.run(Application.class, args);
