@@ -8,17 +8,24 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 public class Application {
-
+    
+    /*  Determining addresses for springboot    */
     @RequestMapping("/")
-    public String home() {
-        return "Hello Docker World";
+    public String dash() {
+        return "<h1>User Dashboard</h1>";
     }
 
-    @RequestMapping("/control")
-    public String control() {
-        return "<h1>control</h1>\n<p>This is <em>in</em> a paragraph</p>\n<p>With a link to <a href=\"https://www.youtube.com\">youtube</a></p>";
+    @RequestMapping("/control-panel")
+    public String controlPanel(){
+        return "<h1>Control panel</h1>";
     }
 
+    @RequestMapping("/customization-tool")
+    public String customizationTool(){
+        return "<h1>Customization tool</h1>";
+    }
+
+    /*  Launching the application   */
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
