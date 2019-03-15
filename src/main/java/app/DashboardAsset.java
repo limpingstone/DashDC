@@ -1,6 +1,6 @@
 public abstract class DashboardAsset{
-    private int[] position = new int[2];
-    private int[] size = new int[2];
+    protected int[] position = new int[2];
+    protected int[] size = new int[2];
     //private Style style;
 
     public void setPosition(int[] position) {
