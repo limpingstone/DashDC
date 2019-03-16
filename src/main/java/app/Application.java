@@ -39,6 +39,13 @@ public class Application {
 	retStr += "ID: <input type='number' name='id'> <br>";
 	retStr += "<input type='submit' name='submit'> <br>";
 	retStr += "</form>";
+
+	/*
+	int[] assetSize = {400,400};
+	int[] assetPosition = new int[2];
+	AssetImage cat = new AssetImage("https://upload.wikimedia.org/wikipedia/commons/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg", assetSize, assetPosition);
+	retStr += cat.display();
+	*/
 	return retStr;
 	    
     }
@@ -64,6 +71,17 @@ public class Application {
 	    retStr += tiles.get(i).getName() + "<br>";
 	retStr += "<br>";
 
+	retStr += "<br> Tile options.<br>";
+	retStr += "<form action='tile' method='post'>";
+	retStr += "<select name='id'>"; // tile id
+
+	for ( int i = 0; i < tiles.size(); i++ ) 
+	    retStr += "<option value='" + tiles.get(i).getId() + "'>" + tiles.get(i).getName() + "</option>";
+	retStr += "</select>";
+	retStr += "<input type='submit' name='submit'>";
+	retStr += "</form><br>";
+
+
 	retStr += "<br> Add a new tile.<br>";
 	retStr += "<form action='newtile' method='post'>";
 	retStr += "Name: <input type='text' name='name'> <br>";
@@ -73,6 +91,8 @@ public class Application {
 
 	return retStr;
     }
+
+
     
     @RequestMapping("/newtile")
     public String newTile(@ModelAttribute FormCapture form) {

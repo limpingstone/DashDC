@@ -1,7 +1,7 @@
 package app;
 
 public class AssetNote extends DashboardAsset{
-    private String noteContents;
+    private String noteText;
 
     public void setContents(String contents){
         this.noteText = contents;
