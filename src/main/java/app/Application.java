@@ -18,6 +18,7 @@ public class Application {
     private static Page currentPage; // current page the viewer is seeing
     // may be unnecessary
     private static Tile currentTile;
+
     private static DashboardAsset currentAsset;
 
     private static final String[] ASSET_TYPES = new String[]{"image", "note", "list"};
@@ -54,14 +55,14 @@ public class Application {
 
     @RequestMapping("/newpage")
     public String newPage(@ModelAttribute FormCapture form) {
-	dashboard.addPage(form.getId(), form.getName());
-	return dash();
+        dashboard.addPage(form.getId(), form.getName());
+        return dash();
     }
 
     @RequestMapping("/page")
     public String pageOptions(@ModelAttribute FormCapture form) {
-	currentPage = dashboard.getDashboardPage(form.getId());
-	return pageOptions();
+        currentPage = dashboard.getDashboardPage(form.getId());
+        return pageOptions();
     }
 
     public String pageOptions() {
@@ -130,8 +131,8 @@ public class Application {
     
     @RequestMapping("/newtile")
     public String newTile(@ModelAttribute FormCapture form) {
-	currentPage.addTile(form.getId(), form.getName());
-	return pageOptions();
+        currentPage.addTile(form.getId(), form.getName());
+        return pageOptions();
     }
 	    
     @RequestMapping("/newasset")
@@ -160,12 +161,13 @@ public class Application {
 	return tileOptions(); 
     }
     
+
     // for prototyping only
     public static void setup() {
-	Application.dashboard = new Dashboard();
+        Application.dashboard = new Dashboard();
     }
-    
-    
+
+
     @RequestMapping("/control-panel")
     public String controlPanel(){
         return "<h1>Control panel</h1>";

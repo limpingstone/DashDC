@@ -10,7 +10,7 @@ public class Console {
 
     // Source: https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
     public void open() {
-        String url = "http://localhost:8080";
+        String url = "http://localhost:8080/control-panel";
 
         try {
             if (Desktop.isDesktopSupported())
@@ -28,11 +28,31 @@ public class Console {
     }
 
     public void launchDashboard() {
+        String url = "http://localhost:8080";
 
+        try {
+            if (Desktop.isDesktopSupported())
+                Desktop.getDesktop().browse(new URI(url));
+            else
+                Runtime.getRuntime().exec("xdg-open " + url);
+        }
+        catch (IOException | URISyntaxException e) {
+            System.out.println("Cannot open browser with url: " + url);
+        }
     }
 
     public void launchCustomizationTool() {
+        String url = "http://localhost:8080/customization-tool";
 
+        try {
+            if (Desktop.isDesktopSupported())
+                Desktop.getDesktop().browse(new URI(url));
+            else
+                Runtime.getRuntime().exec("xdg-open " + url);
+        }
+        catch (IOException | URISyntaxException e) {
+            System.out.println("Cannot open browser with url: " + url);
+        }
     }
 
     public void closeCustomizationTool() {

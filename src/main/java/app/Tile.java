@@ -45,12 +45,13 @@ public class Tile {
     }
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public int getId() {
-	return id;
+        return id;
     }
+
 
     // generic
     // creates a new asset object contained in this tile
@@ -74,7 +75,5 @@ public class Tile {
 	retStr += "</div>";
 	retStr += "<br>";
 	return retStr;
-	
     }
-
 }
