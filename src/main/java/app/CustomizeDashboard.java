@@ -85,7 +85,7 @@ public class CustomizeDashboard {
 
     }
 
-    public void editPageColor(int id, int color) {
+    public void editPageFont(int id, int font) {
 
     }
 
