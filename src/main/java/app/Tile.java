@@ -58,8 +58,23 @@ public class Tile {
 
     }
     
-    public void addAssetImage(int id, String name) {
+    public void addAssetImage(int id, String name, String path, int[] size, int[] position) {
+	AssetImage image = new AssetImage(id, name, path, size, position);
+	assetList.add((DashboardAsset) image);
+    }
 
+    public String display() {
+	//return assetList.toString();
+	
+	String retStr = "";
+	retStr += "<div name='" + this.id + "'>";
+	for ( int i = 0; i < assetList.size(); i++ ) {
+	    retStr += assetList.get(i).display();
+	}
+	retStr += "</div>";
+	retStr += "<br>";
+	return retStr;
+	
     }
 
 }

@@ -42,12 +42,12 @@ public class Application {
 	retStr += "<input type='submit' name='submit'> <br>";
 	retStr += "</form>";
 
-	/*
+	
 	int[] assetSize = {400,400};
 	int[] assetPosition = new int[2];
-	AssetImage cat = new AssetImage("https://upload.wikimedia.org/wikipedia/commons/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg", assetSize, assetPosition);
+	AssetImage cat = new AssetImage(900, "default", "https://upload.wikimedia.org/wikipedia/commons/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg", assetSize, assetPosition);
 	retStr += cat.display();
-	*/
+	
 	return retStr;
 	    
     }
@@ -69,8 +69,11 @@ public class Application {
 
 	retStr += "You are viewing page: " + currentPage.getName() + "<br>";
 	List<Tile> tiles = currentPage.getTiles();
-	for ( int i = 0; i < tiles.size(); i++ )
+	/* move this to Page.java */
+	for ( int i = 0; i < tiles.size(); i++ ) {
 	    retStr += tiles.get(i).getName() + "<br>";
+	    retStr += tiles.get(i).display();
+	}
 	retStr += "<br>";
 
 	retStr += "<br> Tile options.<br>";
@@ -150,9 +153,13 @@ public class Application {
     }
 
     @RequestMapping("/newimage")
-    public String newImage() {
-	return "hi";
+    public String newImage(@ModelAttribute FormCapture form) {
+	int[] size = new int[] {form.getXsize(), form.getYsize() };
+	int[] position = new int[] {form.getXpos(), form.getYpos() };
+	currentTile.addAssetImage(form.getId(), form.getName(), form.getLink(), size, position);
+	return tileOptions(); 
     }
+    
     // for prototyping only
     public static void setup() {
 	Application.dashboard = new Dashboard();

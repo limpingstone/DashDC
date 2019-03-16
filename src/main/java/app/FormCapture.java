@@ -42,35 +42,35 @@ public class FormCapture {
 	this.link = link;
     }
 
-    public int getXSize() {
+    public int getXsize() {
 	return xsize;
     }
 
-    public void setXSize(int xsize) {
+    public void setXsize(int xsize) {
 	this.xsize = xsize;
     }
 
-    public int getYSize() {
+    public int getYsize() {
 	return ysize;
     }
 
-    public void setYSize(int ysize) {
+    public void setYsize(int ysize) {
 	this.ysize = ysize;
     }
     
-    public int getXPos() {
+    public int getXpos() {
 	return xpos;
     }
 
-    public void setXPos(int xpos) {
+    public void setXpos(int xpos) {
 	this.xpos = xpos;
     }
 
-    public int getYPos() {
+    public int getYpos() {
 	return ypos;
     }
 
-    public void setYPos(int ypos) {
+    public void setYpos(int ypos) {
 	this.ypos = ypos;
     }
 
