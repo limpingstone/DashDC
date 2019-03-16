@@ -56,4 +56,5 @@ public class Page {
 	Tile newTile = new Tile(id, name);
 	tileList.add(newTile);
     }
+
 }

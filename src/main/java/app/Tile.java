@@ -6,18 +6,42 @@ import java.util.ArrayList;
 public class Tile {
     String name;
     int id;
-    String contents; // replace with a list of Assets
+    List<DashboardAsset> assetList;
 
     public Tile() {
 	name = "Default.";
 	id = 0;
-	contents = "null";
+	assetList = new ArrayList<DashboardAsset>();
 	
     }
 
     public Tile(int tileID, String tileName) {
 	id = tileID;
 	name = tileName;
+	assetList = new ArrayList<DashboardAsset>();
+    }
+    
+    // returns a list of asset objects
+    public List<DashboardAsset> getAssets() {
+	return assetList;
+    }
+
+    // returns a list of asset names
+    public List<String> getAssetNames() {
+	List<String> names = new ArrayList<String>();
+	for ( int i = 0; i < assetList.size(); i++ ) {
+	    names.add(assetList.get(i).getName());
+	}
+	return names;
+    }
+
+    // returns the asset object with specified id
+    public DashboardAsset getAsset(int id) {
+	for ( int i = 0; i < assetList.size(); i++ ) {
+	    if ( id == assetList.get(i).getId() )
+		return assetList.get(i);
+	}
+	return null; // should be an error if not found
     }
 
     public String getName() {
@@ -27,13 +51,15 @@ public class Tile {
     public int getId() {
 	return id;
     }
+
+    // generic
+    // creates a new asset object contained in this tile
+    public void addAsset(int id, String name) {
+
+    }
     
-    // for prototyping only---
-    public void setContents(String textData) {
-	contents = textData;
+    public void addAssetImage(int id, String name) {
+
     }
 
-    public String getContents() {
-	return contents;
-    }
 }

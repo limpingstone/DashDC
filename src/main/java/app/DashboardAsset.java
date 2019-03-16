@@ -1,10 +1,26 @@
 package app;
 
 public abstract class DashboardAsset{
+    protected int id;
+    protected String name;
+    
     protected int[] position = new int[2];
     protected int[] size = new int[2];
     //private Style style;
 
+    public DashboardAsset(int id, String name) {
+	this.id = id;
+	this.name = name;
+    }
+    
+    public int getId() {
+	return id;
+    }
+
+    public String getName() {
+	return name;
+    }
+    
     public void setPosition(int[] position) {
         this.position = position;
     }

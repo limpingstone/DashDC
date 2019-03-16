@@ -5,8 +5,9 @@ public class AssetImage extends DashboardAsset{
     //  String to hold image path.
     private String imagePath;
 
-    //  Constructor, takes in path, size and position for the asset
-    public AssetImage(String imagePath, int[] size, int[] position){
+    //  Constructor, takes id, name, path, size and position for the asset
+    public AssetImage(int id, String name, String imagePath, int[] size, int[] position){
+	super(id, name);
         this.imagePath = imagePath;
         this.size = size;
         this.position = position;
