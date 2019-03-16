@@ -1,3 +1,5 @@
+package app;
+
 public class AssetFile extends DashboardAsset{
     
     private String filePath;

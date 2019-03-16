@@ -1,3 +1,5 @@
+package app;
+
 public abstract class DashboardAsset{
     protected int[] position = new int[2];
     protected int[] size = new int[2];
