@@ -169,7 +169,7 @@ public class Application {
     // for prototyping only
     public static void setup() {
 	// check if save file exists
-	File save = new File("dash_save.ser");
+	File save = new File("src/main/save/dash_save.ser");
 	if ( save.exists() )
 	    Application.dashboard = load();
 	else
@@ -181,7 +181,7 @@ public class Application {
     public static String save() {
 	//ByteCode.generateSaveFile(dashboard, "dash_save.ser");
 	try {
-	    FileOutputStream fileOut = new FileOutputStream("dash_save.ser");
+	    FileOutputStream fileOut = new FileOutputStream("src/main/save/dash_save.ser");
 	    ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	    out.writeObject(dashboard);
 	    out.close();
@@ -197,7 +197,7 @@ public class Application {
     // returns a dashboard object from save file
     public static Dashboard load() {
     	try {
-	    FileInputStream fileIn = new FileInputStream("dash_save.ser");
+	    FileInputStream fileIn = new FileInputStream("src/main/save/dash_save.ser");
 	    ObjectInputStream in = new ObjectInputStream(fileIn);
 	    Dashboard d = (Dashboard) in.readObject();
 	    in.close();
