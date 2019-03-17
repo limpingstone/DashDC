@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
+import java.io.*;
 
 @SpringBootApplication
 @RestController
@@ -167,14 +168,20 @@ public class Application {
 
     // for prototyping only
     public static void setup() {
-        Application.dashboard = new Dashboard();
+	// check if save file exists
+	File save = new File("dash_save.ser");
+	if ( save.exists() )
+	    Application.dashboard = load();
+	else
+	    Application.dashboard = new Dashboard();
     }
 
+    /* move to ByteCode */
     @RequestMapping("/save")
     public static String save() {
 	//ByteCode.generateSaveFile(dashboard, "dash_save.ser");
 	try {
-	    FileOutputStream fileOut = new FileOutputStream("savefile.ser");
+	    FileOutputStream fileOut = new FileOutputStream("dash_save.ser");
 	    ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	    out.writeObject(dashboard);
 	    out.close();
@@ -187,6 +194,25 @@ public class Application {
 	return "Your dashboard has been saved.";
     }
 
+    // returns a dashboard object from save file
+    public static Dashboard load() {
+    	try {
+	    FileInputStream fileIn = new FileInputStream("dash_save.ser");
+	    ObjectInputStream in = new ObjectInputStream(fileIn);
+	    Dashboard d = (Dashboard) in.readObject();
+	    in.close();
+	    fileIn.close();
+	    return d;
+	} catch (IOException i) {
+	    i.printStackTrace();
+	    return null;
+	} catch (ClassNotFoundException c) {
+	    System.out.println("Employee class not found");
+	    c.printStackTrace();
+	    return null;
+	}
+	
+    }
 
     @RequestMapping("/control-panel")
     public String controlPanel(){
