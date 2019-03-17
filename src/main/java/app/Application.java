@@ -167,6 +167,10 @@ public class Application {
         Application.dashboard = new Dashboard();
     }
 
+    public static void save() {
+
+    }
+
 
     @RequestMapping("/control-panel")
     public String controlPanel(){

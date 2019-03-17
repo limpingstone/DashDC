@@ -2,8 +2,9 @@ package app;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.io.*;
 
-public class Tile {
+public class Tile implements Serializable{
     String name;
     int id;
     List<DashboardAsset> assetList;

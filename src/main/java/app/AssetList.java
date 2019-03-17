@@ -2,8 +2,9 @@ package app;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.io.*;
 
-public class AssetList extends DashboardAsset{
+public class AssetList extends DashboardAsset implements Serializable{
     List<String> listContents = new ArrayList<String>();
 
     public AssetList(int id, String name) {

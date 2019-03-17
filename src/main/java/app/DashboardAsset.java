@@ -1,6 +1,7 @@
 package app;
+import java.io.*;
 
-public abstract class DashboardAsset{
+public abstract class DashboardAsset implements Serializable{
     protected int id;
     protected String name;
     

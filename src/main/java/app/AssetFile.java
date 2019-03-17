@@ -1,6 +1,7 @@
 package app;
+import java.io.*;
 
-public class AssetFile extends DashboardAsset{
+public class AssetFile extends DashboardAsset implements Serializable {
     
     private String filePath;
 

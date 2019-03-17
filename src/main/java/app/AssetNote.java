@@ -1,6 +1,7 @@
 package app;
+import java.io.*;
 
-public class AssetNote extends DashboardAsset{
+public class AssetNote extends DashboardAsset implements Serializable{
     private String noteText;
 
     public AssetNote(int id, String name) {

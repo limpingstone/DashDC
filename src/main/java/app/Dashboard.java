@@ -2,8 +2,9 @@ package app;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.io.*;
 
-public class Dashboard {
+public class Dashboard implements Serializable{
     private List<Page> pageList;
 
     public Dashboard() {

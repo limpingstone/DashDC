@@ -1,6 +1,7 @@
 package app;
+import java.io.*;
 
-public class AssetImage extends DashboardAsset{
+public class AssetImage extends DashboardAsset implements Serializable{
     
     //  String to hold image path.
     private String imagePath;
