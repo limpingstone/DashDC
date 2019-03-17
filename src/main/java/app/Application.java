@@ -43,7 +43,10 @@ public class Application {
 	retStr += "<input type='submit' name='submit'> <br>";
 	retStr += "</form>";
 
-	
+	retStr += "<form action='save' method='post'>";
+	retStr += "<input type='submit' name='Save Dashboard'> <br>";
+	retStr += "</form> <br>";
+	    
 	int[] assetSize = {400,400};
 	int[] assetPosition = new int[2];
 	AssetImage cat = new AssetImage(900, "default", "https://upload.wikimedia.org/wikipedia/commons/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg", assetSize, assetPosition);
@@ -68,7 +71,7 @@ public class Application {
     public String pageOptions() {
 	String retStr = "";
 
-	retStr += "You are viewing page: " + currentPage.getName() + "<br>";
+	retStr += "You are viewinzg page: " + currentPage.getName() + "<br>";
 	List<Tile> tiles = currentPage.getTiles();
 	/* move this to Page.java */
 	for ( int i = 0; i < tiles.size(); i++ ) {
@@ -167,8 +170,21 @@ public class Application {
         Application.dashboard = new Dashboard();
     }
 
-    public static void save() {
+    @RequestMapping("/save")
+    public static String save() {
+	//ByteCode.generateSaveFile(dashboard, "dash_save.ser");
+	try {
+	    FileOutputStream fileOut = new FileOutputStream("savefile.ser");
+	    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	    out.writeObject(dashboard);
+	    out.close();
+	    fileOut.close();
+	}
+	catch (IOException i) {
+	    i.printStackTrace();
+	}
 
+	return "Your dashboard has been saved.";
     }
 
 
