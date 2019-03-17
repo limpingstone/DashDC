@@ -176,42 +176,16 @@ public class Application {
 	    Application.dashboard = new Dashboard();
     }
 
-    /* move to ByteCode */
     @RequestMapping("/save")
     public static String save() {
-	//ByteCode.generateSaveFile(dashboard, "dash_save.ser");
-	try {
-	    FileOutputStream fileOut = new FileOutputStream("src/main/save/dash_save.ser");
-	    ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	    out.writeObject(dashboard);
-	    out.close();
-	    fileOut.close();
-	}
-	catch (IOException i) {
-	    i.printStackTrace();
-	}
-
+	ByteCode.generateSaveFile(dashboard, "src/main/save/dash_save.ser");
 	return "Your dashboard has been saved.";
     }
 
     // returns a dashboard object from save file
     public static Dashboard load() {
-    	try {
-	    FileInputStream fileIn = new FileInputStream("src/main/save/dash_save.ser");
-	    ObjectInputStream in = new ObjectInputStream(fileIn);
-	    Dashboard d = (Dashboard) in.readObject();
-	    in.close();
-	    fileIn.close();
-	    return d;
-	} catch (IOException i) {
-	    i.printStackTrace();
-	    return null;
-	} catch (ClassNotFoundException c) {
-	    System.out.println("Employee class not found");
-	    c.printStackTrace();
-	    return null;
-	}
-	
+	Dashboard d = (Dashboard) ByteCode.loadFromSaveFile("src/main/save/dash_save.ser");
+	return d;
     }
 
     @RequestMapping("/control-panel")
