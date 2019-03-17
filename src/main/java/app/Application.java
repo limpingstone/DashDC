@@ -187,11 +187,12 @@ public class Application {
 	Dashboard d = (Dashboard) ByteCode.loadFromSaveFile("src/main/save/dash_save.ser");
 	return d;
     }
-
-    @RequestMapping("/control-panel")
+	/*
+    @RequestMapping(value = "/control-panel")
     public String controlPanel(){
-        return "<h1>Control panel</h1>";
-    }
+        return "control-panel";
+	}
+	*/
 
     @RequestMapping("/customization-tool")
     public String customizationTool(){

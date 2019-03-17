@@ -14,7 +14,7 @@ gradlew.bat build
 
 To launch the compiled JAR file that contains Spring Boot, type in: 
 ```
-java -jar build/libs/gs-spring-boot-docker-0.1.0.jar
+java -jar build/libs/DashDC-1.0.jar
 ```
 The server page can be accessed by connecting to the localhost at port 8080. In the website URL, type in "localhost:8080"
 
