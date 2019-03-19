@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.*;
 
-public class Page implements Serializable{
+public class Page implements Serializable {
     String name;
     int id;
     List<Tile> tileList;
@@ -29,7 +29,7 @@ public class Page implements Serializable{
     // returns a list of tile names
     public List<String> getTileNames() {
         List<String> names = new ArrayList<String>();
-        for ( int i = 0; i < tileList.size(); i++ ) {
+        for (int i = 0; i < tileList.size(); i++) {
             names.add(tileList.get(i).getName());
         }
         return names;
@@ -37,8 +37,8 @@ public class Page implements Serializable{
 
     // returns the tile object with specified id
     public Tile getTile(int id) {
-        for ( int i = 0; i < tileList.size(); i++ ) {
-            if ( id == tileList.get(i).getId() )
+        for (int i = 0; i < tileList.size(); i++) {
+            if (id == tileList.get(i).getId())
                 return tileList.get(i);
         }
         return null; // should be an error if not found

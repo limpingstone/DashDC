@@ -1,4 +1,5 @@
 package app;
+
 // for capturing and storing data sent via HTML form
 // consider creating a unique one for each form in our application
 // these classes MUST CONTAIN ACCESSOR AND MUTATOR METHODS in order to capture form info
@@ -9,7 +10,7 @@ public class FormCapture {
     private String link;
     private int xsize, ysize;
     private int xpos, ypos;
-    
+
     public String getName() {
         return name;
     }
@@ -27,51 +28,51 @@ public class FormCapture {
     }
 
     public String getType() {
-	return type;
+        return type;
     }
 
     public void setType(String type) {
-	this.type = type;
+        this.type = type;
     }
 
     public String getLink() {
-	return link;
+        return link;
     }
 
     public void setLink(String link) {
-	this.link = link;
+        this.link = link;
     }
 
     public int getXsize() {
-	return xsize;
+        return xsize;
     }
 
     public void setXsize(int xsize) {
-	this.xsize = xsize;
+        this.xsize = xsize;
     }
 
     public int getYsize() {
-	return ysize;
+        return ysize;
     }
 
     public void setYsize(int ysize) {
-	this.ysize = ysize;
+        this.ysize = ysize;
     }
-    
+
     public int getXpos() {
-	return xpos;
+        return xpos;
     }
 
     public void setXpos(int xpos) {
-	this.xpos = xpos;
+        this.xpos = xpos;
     }
 
     public int getYpos() {
-	return ypos;
+        return ypos;
     }
 
     public void setYpos(int ypos) {
-	this.ypos = ypos;
+        this.ypos = ypos;
     }
 
 }
