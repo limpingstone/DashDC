@@ -1,8 +1,10 @@
-package app;
+package app.dashboard;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.io.*;
+
+import app.asset.*;
 
 public class Tile implements Serializable {
     String name;

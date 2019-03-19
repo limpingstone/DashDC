@@ -1,4 +1,4 @@
-package app;
+package app.dashboard;
 
 import java.util.List;
 import java.util.ArrayList;

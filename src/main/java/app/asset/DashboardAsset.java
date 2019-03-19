@@ -1,4 +1,4 @@
-package app;
+package app.asset;
 
 import java.io.*;
 
@@ -15,8 +15,16 @@ public abstract class DashboardAsset implements Serializable {
         this.name = name;
     }
 
+    public void setId(int id){
+        this.id = id;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public String getName() {
@@ -45,5 +53,5 @@ public abstract class DashboardAsset implements Serializable {
      * public Style getStyle(){ return this.style; }
      */
 
-    abstract String display();
+    public abstract String display();
 }

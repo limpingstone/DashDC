@@ -1,9 +1,11 @@
-package app;
+package app.dashboard;
 
 import java.io.IOException;
 import java.awt.Desktop;
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import app.ByteCode;
 
 public class Console {
 

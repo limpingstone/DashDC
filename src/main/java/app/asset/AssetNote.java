@@ -1,4 +1,4 @@
-package app;
+package app.asset;
 import java.io.*;
 
 public class AssetNote extends DashboardAsset implements Serializable{

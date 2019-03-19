@@ -2,6 +2,8 @@ package app;
 
 import java.io.*;
 
+import app.dashboard.*;
+
 public class ByteCode {
 
 	// generates save file from a dashboard object

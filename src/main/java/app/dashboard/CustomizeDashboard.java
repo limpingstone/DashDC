@@ -1,4 +1,4 @@
-package app;
+package app.dashboard;
 
 public class CustomizeDashboard {
     public void signalCreatePage() {
