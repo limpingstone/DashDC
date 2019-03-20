@@ -1,10 +1,12 @@
-package app;
+package app.dashboard;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 import org.junit.*;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import app.asset.DashboardAsset;
 
 @SpringBootTest
 public class TileTest {

@@ -1,4 +1,4 @@
-package app;
+package app.dashboard;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -53,7 +53,7 @@ public class PageTest {
         page = new Page();
         assertEquals(0, page.getId());
 
-        page = new page(5, "testing");
+        page = new Page(5, "testing");
         assertEquals(5, page.getId());
     }
 }
