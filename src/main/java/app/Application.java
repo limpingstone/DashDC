@@ -16,6 +16,7 @@ import java.lang.ProcessBuilder.Redirect;
 import app.asset.*;
 import app.dashboard.*;
 
+
 @SpringBootApplication
 @RestController
 public class Application {
@@ -31,23 +32,26 @@ public class Application {
 	// Declares the types of assets available
 	private static final String[] ASSET_TYPES = new String[] { "image", "note", "list" };
 
-
-
+	// Controll page address
 	@RequestMapping("/page")
 	public String pageOptions(@ModelAttribute FormCapture form) {
 		currentPage = dashboard.getDashboardPage(form.getId());
+		//get display 
 		return pageOptions();
 	}
 
+	// the controller to handle creating a new page (link here if you want to create a new page)
 	@RequestMapping("/newpage")
     public RedirectView newPage(@ModelAttribute FormCapture form) {
         dashboard.addPage(form.getId(), form.getName());
         return new RedirectView("/");
     }
 
+	//returns the display for the page.
 	public String pageOptions() {
+		//Clear the prototyped display
 		String retStr = "";
-
+		//Add the page name to the view
 		retStr += "You are viewinzg page: " + currentPage.getName() + "<br>";
 
 		List<Tile> tiles = currentPage.getTiles();
@@ -68,12 +72,14 @@ public class Application {
 		return retStr;
 	}
 
+	//display the page for tiles
 	@RequestMapping("/tile")
 	public String tileOptions(@ModelAttribute FormCapture form) {
 		currentTile = currentPage.getTile(form.getId());
 		return tileOptions();
 	}
 
+	//Returns the view for tiles
 	public String tileOptions() {
 		String retStr = "";
 
@@ -96,12 +102,14 @@ public class Application {
 		return retStr;
 	}
 
+	//Handles the requests for new tile.
 	@RequestMapping("/newtile")
 	public String newTile(@ModelAttribute FormCapture form) {
 		currentPage.addTile(form.getId(), form.getName());
 		return pageOptions();
 	}
 
+	
 	@RequestMapping("/newasset")
 	public String newAsset(@ModelAttribute FormCapture form) {
 		String type = form.getType();
@@ -121,7 +129,7 @@ public class Application {
 		return tileOptions();
 	}
 
-	// for prototyping only
+	// for prototyping only, handles loading the old dashboard save.
 	public static void setup() {
 		// check if save file exists
 		File save = new File("src/main/save/dash_save.ser");
@@ -131,6 +139,7 @@ public class Application {
 			Application.dashboard = new Dashboard();
 	}
 
+	//Handles saving the dashboard.
 	@RequestMapping("/save")
 	public static String save() {
 		ByteCode.generateSaveFile(dashboard, "src/main/save/dash_save.ser");
