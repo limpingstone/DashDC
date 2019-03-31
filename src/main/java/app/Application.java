@@ -133,10 +133,12 @@ public class Application {
 	public static void setup() {
 		// check if save file exists
 		File save = new File("src/main/save/dash_save.ser");
+		
 		if (save.exists())
 			Application.dashboard = load();
 		else
 			Application.dashboard = new Dashboard();
+		
 	}
 
 	//Handles saving the dashboard.

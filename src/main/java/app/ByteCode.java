@@ -1,8 +1,8 @@
 package app;
 
 import java.io.*;
-
 import app.dashboard.*;
+import app.asset.*;
 
 public class ByteCode {
 
@@ -35,7 +35,7 @@ public class ByteCode {
 			i.printStackTrace();
 			return null;
 		} catch (ClassNotFoundException c) {
-			System.out.println("Employee class not found");
+			System.out.println("Class not found.");
 			c.printStackTrace();
 			return null;
 		}
