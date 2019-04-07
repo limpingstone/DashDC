@@ -61,16 +61,33 @@ public class Tile implements Serializable {
 
     }
 
+    // creates a new AssetImage object
+    // adds the AssetImage to assetList
     public void addAssetImage(int id, String name, String path, int[] size, int[] position) {
         AssetImage image = new AssetImage(id, name, path, size, position);
         assetList.add((DashboardAsset) image);
     }
-
+    
+    // creates a new AssetList object
+    // adds the AssetList to assetList
+    public void addAssetList(int id, String name, String type) {
+	// determine list type
+	char listType;
+	if ( type.equals("ordered") )
+	    listType = 'o';
+	else // type.equals("unordered")
+	    listType = 'u';
+	
+	AssetList list = new AssetList(id, name, listType);
+	assetList.add((DashboardAsset) list);
+	
+    }
+    
     public String display() {
         // return assetList.toString();
 
         String retStr = "";
-        retStr += "<div name='" + this.id + "'>";
+        retStr += "<div name='" + this.id + "' style='border:1px solid black'>";
         for (int i = 0; i < assetList.size(); i++) {
             retStr += assetList.get(i).display();
         }

@@ -91,7 +91,8 @@ public class Application {
 			retStr += assets.get(i).getName() + "<br>";
 		}
 
-		retStr += "<br><br> Add a new asset.<br><form action='newasset' method='post'>Name: <input type='text' name='name'> <br>ID: <input type='number' name='id'> <br><select name='type'>";
+		//retStr += "<br><br> Add a new asset.<br><form action='newasset' method='post'>Name: <input type='text' name='name'> <br>ID: <input type='number' name='id'> <br><select name='type'>";
+		retStr += "<br><br> Add a new asset.<br><form action='newasset' method='post'><select name='type'>";
 
 		for (int i = 0; i < ASSET_TYPES.length; i++) {
 			retStr += "<option value='" + ASSET_TYPES[i] + "'>" + ASSET_TYPES[i] + "</option>";
@@ -114,14 +115,20 @@ public class Application {
 	public String newAsset(@ModelAttribute FormCapture form) {
 		String type = form.getType();
 		String retStr = "";
-		if (type.equals("image")) {
-			retStr += "<form action='newimage' method='post'>Name: <input type='text' name='name'> <br>ID: <input type='number' name='id'> <br>Link to image: <input type='text' name='link'> <br>Size x: <input type='number' name='xsize'> y: <input type='number' name='ysize'> <br>Position x: <input type='number' name='xpos'> y: <input type='number' name='ypos'> <br><input type='submit' name='submit'> <br></form>";
-		}
+		if (type.equals("image"))
+		    retStr += newImageHTML();
+		else if ( type.equals("list") )
+		    retStr += newListHTML();
 
 		return retStr;
 	}
 
-	@RequestMapping("/newimage")
+    // Returns the HTML string necessary to gather user input in creating a new image asset
+    private String newImageHTML() {
+	return "<form action='newimage' method='post'>Name: <input type='text' name='name'> <br>ID: <input type='number' name='id'> <br>Link to image: <input type='text' name='link'> <br>Size x: <input type='number' name='xsize'> y: <input type='number' name='ysize'> <br>Position x: <input type='number' name='xpos'> y: <input type='number' name='ypos'> <br><input type='submit' name='submit'> <br></form>";
+    }
+    
+        @RequestMapping("/newimage")
 	public String newImage(@ModelAttribute FormCapture form) {
 		int[] size = new int[] { form.getXsize(), form.getYsize() };
 		int[] position = new int[] { form.getXpos(), form.getYpos() };
@@ -129,6 +136,82 @@ public class Application {
 		return tileOptions();
 	}
 
+    // Returns the HTML string necessary to gather user input in creating a new list asset
+    private String newListHTML() {
+	String retStr = "<form action='newlist' method='post'>List Title: <input type='txt' name='name'> <br>ID: <input type='number' name='id'>";
+	retStr += "<br>List Type:<br>";
+	retStr += "<input type='radio' name='type' value='unordered'>unordered<br>";
+	retStr += "<input type='radio' name='type' value='ordered'>ordered<br>";
+	retStr += "<input type='submit' name='submit'> <br>";
+	retStr += "</form>";
+	return retStr;
+    }
+	    
+    @RequestMapping("/newlist")
+    public String newList(@ModelAttribute FormCapture form) {
+	currentTile.addAssetList(form.getId(), form.getName(), form.getType());
+	return tileOptions();
+    }
+
+
+    // Gathers the user input on how to edit list
+    @RequestMapping("/editlist")
+    public String editList(@ModelAttribute FormCapture form) {
+	// find the asset object to edit
+	DashboardAsset asset = null;
+	Tile tile = null; 
+	List<Tile> tiles = currentPage.getTiles();
+	for ( int i = 0; i < tiles.size(); i++ ) {
+	    tile = tiles.get(i);
+	    asset = tile.getAsset(form.getId());
+	    if ( asset != null )
+		break;
+	}
+	if ( asset == null || tile == null) // asset not found
+	    return "List asset not found.";
+
+	// the AssetList that wants to be edited
+	AssetList listAsset = (AssetList) asset;
+
+	String retStr = "<p>Instructions: You can edit the name by changing the textbox. The list contents are in the big text box below. Each list element is delimited by a *. You can add new list elements by adding new * and the list contents. You can delete list elements by removing a * and its contents. You can edit list element content itself by not changing the *.</p>";
+	retStr += "<form action='executelistedit' method='post'>";
+	retStr += "Name: <input type='text' name='name' value='" + listAsset.getName() + "'><br>";
+	retStr += "<input type='hidden' name='tileId' value='" + tile.getId() + "'>";
+	retStr += "<input type='hidden' name='assetId' value='" + listAsset.getId() + "'>";
+	// type
+	if ( listAsset.getType() == 'o' ) {
+	    retStr += "<input type='radio' name='type' value='unordered'> unordered <br>";
+	    retStr += "<input type='radio' name='type' value='ordered' checked> ordered <br>";
+	}
+	else { // listAsset.getType() == 'u'
+	    retStr += "<input type='radio' name='type' value='unordered' checked> unordered <br>";
+	    retStr += "<input type='radio' name='type' value='ordered'> ordered <br>";
+	}
+	retStr += "Conents: <br> <textarea rows='25' cols='100' name='text'>" + listAsset.contentEdit() + "</textarea> <br>";
+	retStr += "<input type='submit' name='submit' value='Confirm edit'>";
+	retStr += "</form>";
+	
+	return retStr;
+    }
+
+    // Edits the AssetList object based on user input received through /editlist
+    @RequestMapping("/executelistedit")
+    public String executeListEdit(@ModelAttribute FormCapture form) {
+	// get AssetList object to edit
+	AssetList listAsset = (AssetList) (currentPage.getTile(form.getTileId()).getAsset(form.getAssetId()));
+
+	// perform edit functions
+	listAsset.setName( form.getName() );
+	if ( form.getType().equals("ordered") )
+	    listAsset.setType('o');
+	else // form.getType().equals("unordered")
+	    listAsset.setType('u');
+
+	listAsset.updateContents(form.getText());
+	//return form.getText();
+        return pageOptions();
+    }
+    
 	// for prototyping only, handles loading the old dashboard save.
 	public static void setup() {
 		// check if save file exists

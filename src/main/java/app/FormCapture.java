@@ -8,9 +8,13 @@ public class FormCapture {
     private int id;
     private String type;
     private String link;
+    private String text;
     private int xsize, ysize;
     private int xpos, ypos;
 
+    private int tileId;
+    private int assetId;
+    
     public String getName() {
         return name;
     }
@@ -43,6 +47,14 @@ public class FormCapture {
         this.link = link;
     }
 
+    public String getText() {
+	return text;
+    }
+
+    public void setText(String text) {
+	this.text = text;
+    }
+    
     public int getXsize() {
         return xsize;
     }
@@ -73,6 +85,22 @@ public class FormCapture {
 
     public void setYpos(int ypos) {
         this.ypos = ypos;
+    }
+
+    public int getTileId() {
+	return tileId;
+    }
+
+    public void setTileId(int tileId) {
+	this.tileId = tileId;
+    }
+
+    public int getAssetId() {
+	return assetId;
+    }
+
+    public void setAssetId(int assetId) {
+	this.assetId = assetId;
     }
 
 }
