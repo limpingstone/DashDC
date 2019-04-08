@@ -188,7 +188,8 @@ public class Application {
 	    retStr += "<input type='radio' name='type' value='unordered' checked> unordered <br>";
 	    retStr += "<input type='radio' name='type' value='ordered'> ordered <br>";
 	}
-	retStr += "Conents: <br> <textarea rows='25' cols='100' name='text'>" + listAsset.contentEdit() + "</textarea> <br>";
+	// Contents
+	retStr += "Contents: <br> <textarea rows='25' cols='100' name='text'>" + listAsset.contentEdit() + "</textarea> <br>";
 	retStr += "<input type='submit' name='submit' value='Confirm edit'>";
 	retStr += "</form>";
 	
@@ -226,6 +227,51 @@ public class Application {
     public String newNote(@ModelAttribute FormCapture form) {
 	currentTile.addAssetNote(form.getId(), form.getName());
 	return tileOptions();
+    }
+
+    // Gathers the user input on how to edit note
+    @RequestMapping("/editnote")
+    public String editNote(@ModelAttribute FormCapture form) {
+	// find the asset object to edit
+	DashboardAsset asset = null;
+	Tile tile = null; 
+	List<Tile> tiles = currentPage.getTiles();
+	for ( int i = 0; i < tiles.size(); i++ ) {
+	    tile = tiles.get(i);
+	    asset = tile.getAsset(form.getId());
+	    if ( asset != null )
+		break;
+	}
+	if ( asset == null || tile == null) // asset not found
+	    return "Note asset not found.";
+
+	// the AssetNote that wants to be edited
+	AssetNote noteAsset = (AssetNote) asset;
+	String retStr = "";
+	retStr += "<form action='executenoteedit' method='post'>";
+	retStr += "Name: <input type='text' name='name' value='" + noteAsset.getName() + "'><br>";
+	retStr += "<input type='hidden' name='tileId' value='" + tile.getId() + "'>";
+	retStr += "<input type='hidden' name='assetId' value='" + noteAsset.getId() + "'>";
+
+	// Contents
+	retStr += "Contents: <br> <textarea rows='25' cols='100' name='text'>" + noteAsset.getContents() + "</textarea> <br>";
+	retStr += "<input type='submit' name='submit' value='Confirm edit'>";
+	retStr += "</form>";
+
+	return retStr;
+    }
+
+    // Edits the NoteAsset object based on user input received through /editnote
+    @RequestMapping("/executenoteedit")
+    public String executeNoteEdit(@ModelAttribute FormCapture form) {
+	// get AssetNote object to edit
+	AssetNote noteAsset = (AssetNote) (currentPage.getTile(form.getTileId()).getAsset(form.getAssetId()));
+
+	// perform edit functions
+	noteAsset.setName( form.getName() );
+	noteAsset.setContents( form.getText() );
+
+	return pageOptions(); // go back to dashboard page
     }
 
     
