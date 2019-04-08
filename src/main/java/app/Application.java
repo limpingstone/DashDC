@@ -30,7 +30,7 @@ public class Application {
 	private static DashboardAsset currentAsset;
 
 	// Declares the types of assets available
-	private static final String[] ASSET_TYPES = new String[] { "image", "note", "list" };
+    private static final String[] ASSET_TYPES = new String[] { "image", "note", "list", "link" };
 
 	// Control page address
 	@RequestMapping("/page")
@@ -121,7 +121,9 @@ public class Application {
 		    retStr += newListHTML();
 		else if (type.equals("note"))
 		    retStr += newNoteHTML();
-
+		else if (type.equals("link"))
+		    retStr += newLinkHTML();
+		
 		return retStr;
 	}
 
@@ -129,7 +131,8 @@ public class Application {
     private String newImageHTML() {
 	return "<form action='newimage' method='post'>Name: <input type='text' name='name'> <br>ID: <input type='number' name='id'> <br>Link to image: <input type='text' name='link'> <br>Size x: <input type='number' name='xsize'> y: <input type='number' name='ysize'> <br>Position x: <input type='number' name='xpos'> y: <input type='number' name='ypos'> <br><input type='submit' name='submit'> <br></form>";
     }
-    
+
+    // Creates the new image asset specified by user input
         @RequestMapping("/newimage")
 	public String newImage(@ModelAttribute FormCapture form) {
 		int[] size = new int[] { form.getXsize(), form.getYsize() };
@@ -139,6 +142,24 @@ public class Application {
 		//return tileOptions();
 	}
 
+    // Returns the HTML string necessary to gather user input in creating a new link asset
+    private String newLinkHTML() {
+	String retStr = "";
+	retStr += "<form action='newlink' method='post'>";
+	retStr += "Name: <input type='text' name='name'> <br>";
+	retStr += "ID: <input type='number' name='id'><br>";
+	retStr += "Link to webpage: <input type='text' name='link'> <br>";
+	retStr += "<input type='submit' name='submit'> <br></form>";
+	return retStr;
+    }
+
+    // Creates the new link asset specified by user input
+    @RequestMapping("/newlink")
+    public String newLink(@ModelAttribute FormCapture form) {
+	currentTile.addAssetLink(form.getId(), form.getName(), form.getLink());
+	return pageOptions(); // go back to dashboard page
+    }
+	
     // Returns the HTML string necessary to gather user input in creating a new list asset
     private String newListHTML() {
 	String retStr = "<form action='newlist' method='post'>List Title: <input type='txt' name='name'> <br>ID: <input type='number' name='id'>";
