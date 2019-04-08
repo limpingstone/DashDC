@@ -32,7 +32,7 @@ public class Application {
 	// Declares the types of assets available
 	private static final String[] ASSET_TYPES = new String[] { "image", "note", "list" };
 
-	// Controll page address
+	// Control page address
 	@RequestMapping("/page")
 	public String pageOptions(@ModelAttribute FormCapture form) {
 		currentPage = dashboard.getDashboardPage(form.getId());
@@ -52,7 +52,7 @@ public class Application {
 		//Clear the prototyped display
 		String retStr = "";
 		//Add the page name to the view
-		retStr += "You are viewinzg page: " + currentPage.getName() + "<br>";
+		retStr += "You are viewing page: " + currentPage.getName() + "<br>";
 
 		List<Tile> tiles = currentPage.getTiles();
 		/* move this to Page.java */
@@ -119,6 +119,8 @@ public class Application {
 		    retStr += newImageHTML();
 		else if ( type.equals("list") )
 		    retStr += newListHTML();
+		else if (type.equals("note"))
+		    retStr += newNoteHTML();
 
 		return retStr;
 	}
@@ -152,7 +154,6 @@ public class Application {
 	currentTile.addAssetList(form.getId(), form.getName(), form.getType());
 	return tileOptions();
     }
-
 
     // Gathers the user input on how to edit list
     @RequestMapping("/editlist")
@@ -211,6 +212,22 @@ public class Application {
 	//return form.getText();
         return pageOptions();
     }
+
+    // Returns the HTML string necessary to gather user input in creating a new note asset
+    private String newNoteHTML() {
+	String retStr = "<form action='newnote' method='post'>Note Title: <input type='txt' name='name'> <br>";
+	retStr += "ID: <input type='number' name='id'>";
+	retStr += "<input type='submit' name='submit'> <br>";
+	retStr += "</form>";
+	return retStr;
+    }
+
+    @RequestMapping("/newnote")
+    public String newNote(@ModelAttribute FormCapture form) {
+	currentTile.addAssetNote(form.getId(), form.getName());
+	return tileOptions();
+    }
+
     
 	// for prototyping only, handles loading the old dashboard save.
 	public static void setup() {
@@ -224,6 +241,7 @@ public class Application {
 		
 	}
 
+    
 	//Handles saving the dashboard.
 	@RequestMapping("/save")
 	public static String save() {

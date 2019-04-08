@@ -82,6 +82,13 @@ public class Tile implements Serializable {
 	assetList.add((DashboardAsset) list);
 	
     }
+
+    // creates a new AssetNote object
+    // ads the AssetNote to assetList
+    public void addAssetNote(int id, String name) {
+	AssetNote note = new AssetNote(id, name);
+	assetList.add((DashboardAsset) note);
+    }
     
     public String display() {
         // return assetList.toString();
