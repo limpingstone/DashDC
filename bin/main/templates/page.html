@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Page</title>
+</head>
+
+<body>
+    <h1 th:text="${page.name}"></h1>
+    <div th:each="tile : ${tileList}">
+        <h2 th:text="${tile.getName()}"></h2>
+        <div th:each="asset : ${tile.getAssets()}">
+            <!--<div th:replace="${asset.display()}"></div>-->
+            <div th:remove="tag" th:utext="${asset.display()}"></div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -23,11 +23,11 @@ public class Application {
 	// Temporary public to test dashboard controller (PROTO)
 	public static Dashboard dashboard;
 	// Stores the current page being viewed (PROTO)
-	private static Page currentPage;
+	public static Page currentPage;
 	// Stores the current tiles (PROTO)
-	private static Tile currentTile;
+	public static Tile currentTile;
 	// Stores current assets (PROTO)
-	private static DashboardAsset currentAsset;
+	public static DashboardAsset currentAsset;
 
 	// Declares the types of assets available
 	private static final String[] ASSET_TYPES = new String[] { "image", "note", "list" };
@@ -39,13 +39,6 @@ public class Application {
 		//get display 
 		return pageOptions();
 	}
-
-	// the controller to handle creating a new page (link here if you want to create a new page)
-	@RequestMapping("/newpage")
-    public RedirectView newPage(@ModelAttribute FormCapture form) {
-        dashboard.addPage(form.getId(), form.getName());
-        return new RedirectView("/");
-    }
 
 	//returns the display for the page.
 	public String pageOptions() {
@@ -237,13 +230,8 @@ public class Application {
 		return d;
 	}
 
-	@RequestMapping("/customization-tool")
-	public String customizationTool() {
-		return "<h1>Customization tool</h1>";
-	}
-
+	
 	/* Launching the application */
-
 	public static void main(String[] args) {
 		Application.setup();
 		SpringApplication.run(Application.class, args);
