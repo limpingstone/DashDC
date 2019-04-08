@@ -135,7 +135,8 @@ public class Application {
 		int[] size = new int[] { form.getXsize(), form.getYsize() };
 		int[] position = new int[] { form.getXpos(), form.getYpos() };
 		currentTile.addAssetImage(form.getId(), form.getName(), form.getLink(), size, position);
-		return tileOptions();
+		return pageOptions();
+		//return tileOptions();
 	}
 
     // Returns the HTML string necessary to gather user input in creating a new list asset
