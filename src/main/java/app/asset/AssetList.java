@@ -33,7 +33,12 @@ public class AssetList extends DashboardAsset implements Serializable{
     public void setType(char type) {
 	this.type = type;
     }
-    
+
+    // returns the List of string contents
+    public List<String> getListContents() {
+	return listContents;
+    }
+
     // Adds a new String element to the end of listContents
     // The string is specified by the contents of text
     public void addListItem(String text) {
