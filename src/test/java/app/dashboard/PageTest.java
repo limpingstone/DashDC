@@ -38,6 +38,37 @@ public class PageTest {
         assertEquals(5, page.getId());
     }
 
+    @Test
+    public void testAddTile() {
+	// testing the addTile() method
+	page = new Page();
+	page.addTile(3, "calvin");
+	page.addTile(2, "lollipop");
+	assertArrayEquals(new String[] {"calvin", "lollipop"}, page.getTileNames().toArray());
+    }
+
+    @Test
+    public void testGetTile() {
+	// testing the getTile() method
+	page = new Page();
+	page.addTile(10, "chi");
+
+	assertEquals(page.getTile(10).getName(), "chi");
+	assertNull(page.getTile(1));
+    }
+
+    @Test
+    public void testGetTiles() {
+	// testing the getTiles() method
+	page = new Page();
+	page.addTile(3, "calvin");
+	page.addTile(2, "lollipop");
+	
+	assertNotNull(page.getTiles());
+	assertEquals(2, page.getTiles().size());
+    }
+	
+	
     /* TESTS OF ACCESSOR METHODS */
     @Test
     public void testGetName() {
