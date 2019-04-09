@@ -60,4 +60,13 @@ public class AssetImageTest {
         assertEquals(50, assetImage.getPosition()[1]);
         */
     }
+    @Test
+    public void testDisplay() {
+	// tests the display() method
+	assetImage = new AssetImage(20, "image1", "link", new int[] {200, 210}, new int[] {2, 2});
+	assertEquals(assetImage.display(), "<img src=\"link\" style=\"width:200; height: 210;\"><br>");
+    }
+		     
+	
+    
 }

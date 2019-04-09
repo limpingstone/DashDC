@@ -6,7 +6,8 @@ import static org.junit.Assert.*;
 import org.junit.*;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import app.asset.DashboardAsset;
+import app.asset.*;
+import app.dashboard.*;
 
 @SpringBootTest
 public class TileTest {
@@ -110,7 +111,69 @@ public class TileTest {
 	tile.addAssetImage(3, "image3", "path3", size, position);
 	assertArrayEquals(new String[] {"image1", "image2", "image3"}, tile.getAssetNames().toArray());
     }
+
+    @Test
+    public void testAddAssetLink() {
+	tile = new Tile();
+
+	// add 1 asset to tile
+	tile.addAssetLink(1, "link1", "path1");
+	assertArrayEquals(new String[] {"link1"}, tile.getAssetNames().toArray());
+
+	// add 2 more assets to tile
+	tile.addAssetLink(2, "link2", "path2");
+	tile.addAssetLink(3, "link3", "path3");
+	assertArrayEquals(new String[] {"link1", "link2", "link3"}, tile.getAssetNames().toArray());
+    }
+
+
+    @Test
+    public void addAssetList() {
+	tile = new Tile();
+
+	// add 1 asset to tile
+	tile.addAssetList(1, "list1", "ordered");
+	assertArrayEquals(new String[] {"list1"}, tile.getAssetNames().toArray());
+
+	// add 2 more assets to tile
+	tile.addAssetList(2, "list2", "ordered");
+	tile.addAssetList(3, "list3",  "unordered");
+	assertArrayEquals(new String[] {"list1", "list2", "list3"}, tile.getAssetNames().toArray());
+
+	// check list types
+	assertEquals(((AssetList)tile.getAsset(1)).getType(), 'o');
+	assertEquals(((AssetList)tile.getAsset(3)).getType(), 'u');
+    }
+
+    @Test
+    public void addAssetNote() {
+	tile = new Tile();
+
+	// add 1 asset to tile
+	tile.addAssetNote(1, "note1");
+	assertArrayEquals(new String[] {"note1"}, tile.getAssetNames().toArray());
+
+	// add 2 more assets to tile
+	tile.addAssetNote(2, "note2");
+	tile.addAssetNote(3, "note3");
+	assertArrayEquals(new String[] {"note1", "note2", "note3"}, tile.getAssetNames().toArray());
+
+	assertEquals(((AssetNote)tile.getAsset(2)).getContents(), "new note");
+
+    }
+
+    @Test
+    public void testDisplay() {
+	tile = new Tile();
+
+	// add assets to tile
+	tile.addAssetNote(1, "note1");
+	tile.addAssetList(2, "list1", "ordered");
+
+	assertNotNull(tile.display());
+    }
     
+	    
     /* TESTS OF ACCESSOR METHODS */
     @Test
     public void testGetName() {
