@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Editing page: </title>
+    <title>Customize Page</title>
 </head>
 
 <body>
     <h1>Customize User Dashboard</h1>
 
+    <!-- Preview of the page being edited -->
     <h2>Current Preview of the page:</h2>
     <h1 th:text="${currentPage.name}"></h1>
     <div th:each="tile : ${tileList}">
@@ -16,6 +17,7 @@
         </div>
     </div>
 
+    <!-- Selecting the tile to be edited -->
     <h2>Here are the tiles that currently exist:</h2>
     <p>Select which one to edit:</p>
     <form action="selecttile" method="POST">
@@ -26,6 +28,7 @@
         <input type="submit" name="submit">
     </form>
 
+    <!-- Adding new tiles -->
     <h2>Add a new tile:</h2>
     <form action="newtile" method="POST">
         <p>Name:</p><input type="text" name="name">
@@ -33,6 +36,7 @@
         <p></p><input type="submit" name="submit">
     </form>
 
+    <!-- Saving the dashboard -->
     <h2>Save the dashboard:</h2>
     <form action="save" method="POST">
         <input type="submit" name="Save Dashboard" value="Save the dashboard!">

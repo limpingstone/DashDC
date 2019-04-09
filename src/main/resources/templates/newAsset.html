@@ -6,8 +6,14 @@
 
 <body>
     <h1>Customize User Dashboard</h1>
+
+    <!-- Creating a new asset -->
     <h2>Creating new asset:</h2>
+
+    <!-- Thymeleaf switch to determine type of asset creation to show -->
     <th:block th:switch="${type}">
+        
+        <!-- Create an image asset type -->
         <div th:case="'image'">
                 <form action='newimage' method='post'>
                     Name: <input type='text' name='name'> 
@@ -19,6 +25,8 @@
                     <input type='submit' name='submit'>
                 </form>
         </div>
+
+        <!-- Create an list asset type -->
         <div th:case="'list'">
                 <form action='newlist' method='post'>
                     List Title: <input type='txt' name='name'> 

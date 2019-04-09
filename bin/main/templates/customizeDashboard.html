@@ -8,6 +8,7 @@
 <body>
     <h1>Customize User Dashboard</h1>
 
+    <!-- Selecting the page to be edited -->
     <h2>Here are the pages that currently exist:</h2>
     <p>Select which one to edit:</p>
     <form action="selectpage" method="POST">
@@ -18,13 +19,15 @@
         <input type="submit" name="submit">
     </form>
 
+    <!-- Adding new pages -->
     <h2>Add a new page:</h2>
     <form action="newpage" method="POST">
         <p>Name:</p><input type="text" name="name">
         <p>ID:</p><input type="number" name="id">
         <p></p><input type="submit" name="submit">
     </form>
-    
+
+    <!-- Saving the dashboard -->
     <h2>Save the dashboard:</h2>
     <form action="save" method="POST">
         <input type="submit" name="Save Dashboard" value="Save the dashboard!">

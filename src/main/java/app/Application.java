@@ -49,7 +49,7 @@ public class Application {
 		return d;
 	}
 
-	/* Launching the application */
+	// Launching the application
 	public static void main(String[] args) {
 		Application.setup();
 		SpringApplication.run(Application.class, args);

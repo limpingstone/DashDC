@@ -14,24 +14,31 @@ import app.FormCapture;
 
 @Controller
 public class DashboardController {
-      // Controll page address
+
+      // Default dashboard address
       @GetMapping("/")
       public String dashboard(Model model, @ModelAttribute FormCapture form) {
 
-            // Set default page
+            // Set default dashboard page if one is not selected
             if (Application.currentPage == null) {
                   Application.currentPage = Application.dashboard.getPages().get(0);
             }
             
+            //Pass attributes to thymeleaf
             model.addAttribute("currentPage", Application.currentPage);
             model.addAttribute("pageList", Application.dashboard.getPages());
             model.addAttribute("tileList", Application.currentPage.getTiles());
+            
             return "page";
       }
 
+      // Request handler for changing the dashboard page
       @RequestMapping("/changeDashboard")
       public RedirectView changeDashboard(@ModelAttribute FormCapture form) {
+            //Update the current page
             Application.currentPage = Application.dashboard.getDashboardPage(form.getId());
+            
+            //Return the user back to dashboard
             return new RedirectView("/");
       }
 
