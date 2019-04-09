@@ -26,7 +26,6 @@ public class Application {
 
 	// for prototyping only, handles loading the old dashboard save.
 	public static void setup() {
-
 		// Launches the console GUI
 		Console.open();
 
