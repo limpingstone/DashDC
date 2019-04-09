@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Customize Page</title>
+</head>
+
+<body>
+    <h1>Customize User Dashboard</h1>
+
+    <!-- Preview of the page being edited -->
+    <h2>Current Preview of the page:</h2>
+    <h1 th:text="${currentPage.name}"></h1>
+    <div th:each="tile : ${tileList}" style="border-style: solid">
+        <h2 th:text="${tile.getName()}"></h2>
+        <div th:each="asset : ${tile.getAssets()}">
+            <div th:remove="tag" th:utext="${asset.display()}"></div>
+        </div>
+    </div>
+
+    <!-- Selecting the tile to be edited -->
+    <h2>Here are the tiles that currently exist:</h2>
+    <p>Select which one to edit:</p>
+    <form action="selecttile" method="POST">
+        <select name="id">
+            <option th:each="tile : ${tileList}" th:value="${tile.id}" th:text="${tile.name}">
+            </option>
+        </select>
+        <input type="submit" name="submit">
+    </form>
+
+    <!-- Adding new tiles -->
+    <h2>Add a new tile:</h2>
+    <form action="newtile" method="POST">
+        <p>Name:</p><input type="text" name="name">
+        <p>ID:</p><input type="number" name="id">
+        <p></p><input type="submit" name="submit">
+    </form>
+
+    <!-- Saving the dashboard -->
+    <h2>Save the dashboard:</h2>
+    <form action="/save" method="POST">
+        <input type="submit" name="Save Dashboard" value="Save the dashboard!">
+    </form>
+</body>
+
+</html>

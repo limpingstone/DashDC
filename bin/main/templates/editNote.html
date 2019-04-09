@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Edit List</title>
+</head>
+
+<body>
+    <h1>Edit Note</h1>
+
+    <!-- Edit list form -->
+    <form action="executeeditnote" method="post">
+        Name: <input type="text" name="name" th:value="${noteAsset.getName()}">
+        <input type="hidden" name="tileId" th:value="${containingTile.getId()}">
+        <input type="hidden" name="assetId" th:value="${noteAsset.getId()}">
+
+        <!-- Contents of the form -->
+        <h2>Contents:</h2>
+        <br> <textarea rows="25" cols="100" name="text" th:text="${noteAsset.getContents()}"></textarea>
+        <input type="submit" name="submit" value="Confirm edit">
+    </form>
+</body>
+
+</html>

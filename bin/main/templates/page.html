@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <!-- form to choose which page to view -->
+    <form action="/changeDashboard" method="POST">
+        <select name="id">
+            <option th:each="page : ${pageList}" th:value="${page.id}" th:text="${page.name}">
+            </option>
+        </select>
+        <input type="submit" name="submit">
+    </form>
+
+    <!-- Prototyping button select for pages -->
+    <!--
+    <form th:each="page : ${pageList}" action="/" method="POST" th:id="${page.id}">
+        <input type = "submit" th:form="${page.id}" th:name="${page.id}" th:value="${page.name}">
+    </form>
+    -->
+
+    <!-- Creates the name of the page -->
+    <h1 th:text="${currentPage.name}"></h1>
+
+    <!-- Thymeleaf each for each tile -->
+    <div th:each="tile : ${tileList}" style="border-style: solid">
+        <h2 th:text="${tile.getName()}"></h2>
+
+        <!-- Thymeleaf each to display each asset -->
+        <div th:each="asset : ${tile.getAssets()}">
+            <div th:remove="tag" th:utext="${asset.display()}"></div>
+        </div>
+    </div>
+</body>
+
+</html>
