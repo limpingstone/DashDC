@@ -5,11 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.io.File;
 import app.asset.*;
 import app.dashboard.*;
 
@@ -31,52 +27,8 @@ public class Application {
 	// for prototyping only, handles loading the old dashboard save.
 	public static void setup() {
 
-		JFrame consoleFrame = new JFrame("Dash Console");
-		consoleFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        consoleFrame.setSize(320, 240);
-
-        JPanel panel = new JPanel();
-        FlowLayout layout = new FlowLayout();
-        panel.setLayout(layout);
-
-		JButton launchDashboardButton = new JButton("Launch Dashboard");
-		JButton launchCustomizeButton = new JButton("Customization Tool");
-		JButton killJarButton = new JButton("Exit");
-
-		launchDashboardButton.addActionListener(e -> {
-			String url = "http://127.0.0.1:8080/";
-		    try {
-		        if (Desktop.isDesktopSupported())
-		            Desktop.getDesktop().browse(new URI(url));
-		        else
-		            Runtime.getRuntime().exec("xdg-open " + url);
-		    } catch (IOException | URISyntaxException ex) {
-		        System.out.println("Cannot open browser with url: " + url);
-		    }
-		});
-
-		launchCustomizeButton.addActionListener(e -> {
-			String url = "http://127.0.0.1:8080/customize/";
-		    try {
-		        if (Desktop.isDesktopSupported())
-		            Desktop.getDesktop().browse(new URI(url));
-		        else
-		            Runtime.getRuntime().exec("xdg-open " + url);
-		    } catch (IOException | URISyntaxException ex) {
-		        System.out.println("Cannot open browser with url: " + url);
-		    }
-		});
-
-		killJarButton.addActionListener(e -> {
-		    System.exit(0);
-		});
-
-		panel.add(launchDashboardButton);
-		panel.add(launchCustomizeButton);
-		panel.add(killJarButton);
-
-		consoleFrame.getContentPane().add(panel);
-		consoleFrame.setVisible(true);
+		// Launches the console GUI
+		Console.open();
 
 		// check if save file exists
 		File save = new File("src/main/save/dash_save.ser");

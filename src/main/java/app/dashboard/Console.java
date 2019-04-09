@@ -1,5 +1,7 @@
 package app.dashboard;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.awt.Desktop;
 import java.net.URI;
@@ -9,80 +11,103 @@ import app.ByteCode;
 
 public class Console {
 
-    // Source:
-    // https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
-    public void open() {
-        String url = "http://localhost:8080/control-panel";
+    private static JFrame consoleFrame; 
 
+    /**
+     * Source:
+     * https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
+     */
+    public static void open() {
+
+        /* Creating a JFrame for the console with the appropriate parameters */
+        consoleFrame = new JFrame("Dash Console");
+        consoleFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        consoleFrame.setSize(320, 240);
+
+        JPanel panel = new JPanel();
+        FlowLayout layout = new FlowLayout();
+        panel.setLayout(layout);
+
+        JButton launchDashboardButton = new JButton("Launch Dashboard");
+        launchDashboardButton.addActionListener(e -> {
+            Console.launchDashboard();
+        });
+
+        JButton launchCustomizeButton = new JButton("Customization Tool");
+        launchCustomizeButton.addActionListener(e -> {
+            Console.launchCustomizationTool();
+        });
+
+        JButton killJarButton = new JButton("Exit");
+        killJarButton.addActionListener(e -> {
+            Console.exit();
+        });
+
+        panel.add(launchDashboardButton);
+        panel.add(launchCustomizeButton);
+        panel.add(killJarButton);
+
+        consoleFrame.getContentPane().add(panel);
+        consoleFrame.setVisible(true);
+    }
+
+    public static void startSetup() {
+
+    }
+
+    public static void launchDashboard() {
+        String url = "http://127.0.0.1:8080/";
         try {
             if (Desktop.isDesktopSupported())
                 Desktop.getDesktop().browse(new URI(url));
             else
                 Runtime.getRuntime().exec("xdg-open " + url);
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException | URISyntaxException ex) {
             System.out.println("Cannot open browser with url: " + url);
         }
     }
 
-    public void startSetup() {
-
-    }
-
-    public void launchDashboard() {
-        String url = "http://localhost:8080";
-
+    public static void launchCustomizationTool() {
+        String url = "http://127.0.0.1:8080/customize/";
         try {
             if (Desktop.isDesktopSupported())
                 Desktop.getDesktop().browse(new URI(url));
             else
                 Runtime.getRuntime().exec("xdg-open " + url);
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException | URISyntaxException ex) {
             System.out.println("Cannot open browser with url: " + url);
         }
     }
 
-    public void launchCustomizationTool() {
-        String url = "http://localhost:8080/customization-tool";
-
-        try {
-            if (Desktop.isDesktopSupported())
-                Desktop.getDesktop().browse(new URI(url));
-            else
-                Runtime.getRuntime().exec("xdg-open " + url);
-        } catch (IOException | URISyntaxException e) {
-            System.out.println("Cannot open browser with url: " + url);
-        }
-    }
-
-    public void closeCustomizationTool() {
+    public static void closeCustomizationTool() {
 
     }
 
-    public void getMode() {
+    public static void getMode() {
 
     }
 
-    public void setMode(boolean advanced) {
+    public static void setMode(boolean advanced) {
 
     }
 
-    public ByteCode writeContents(Dashboard dash, CustomizeDashboard customDash) {
+    public static ByteCode writeContents(Dashboard dash, CustomizeDashboard customDash) {
         return null;
     }
 
-    public void save(ByteCode output, String filePath) {
+    public static void save(ByteCode output, String filePath) {
 
     }
 
-    public void backup(ByteCode output) {
+    public static void backup(ByteCode output) {
 
     }
 
-    public void exit() {
-
+    public static void exit() {
+        System.exit(0);
     }
 
-    public void uninstall() {
+    public static void uninstall() {
 
     }
 }
