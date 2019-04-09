@@ -11,25 +11,31 @@ public class Tile implements Serializable {
     int id;
     List<DashboardAsset> assetList;
 
+    // Default constructor
+    // Sets the default id and name attribute
+    // Instantiates the assetList
     public Tile() {
         name = "Default.";
         id = 0;
         assetList = new ArrayList<DashboardAsset>();
 
     }
-
+    
+    // Overloaded constructor
+    // Sets the id and name attribute to the input parameter
+    // Instantiates the assetList
     public Tile(int tileID, String tileName) {
         id = tileID;
         name = tileName;
         assetList = new ArrayList<DashboardAsset>();
     }
 
-    // returns a list of asset objects
+    // Returns a List of Asset objects contained in this Tile
     public List<DashboardAsset> getAssets() {
         return assetList;
     }
 
-    // returns a list of asset names
+    // Returns a List of asset names contained in this tile
     public List<String> getAssetNames() {
         List<String> names = new ArrayList<String>();
         for (int i = 0; i < assetList.size(); i++) {
@@ -38,7 +44,7 @@ public class Tile implements Serializable {
         return names;
     }
 
-    // returns the asset object with specified id
+    // Returns the Asset object with specified id
     public DashboardAsset getAsset(int id) {
         for (int i = 0; i < assetList.size(); i++) {
             if (id == assetList.get(i).getId())
@@ -47,36 +53,38 @@ public class Tile implements Serializable {
         return null; // should be an error if not found
     }
 
+    // Returns the name attribute
     public String getName() {
         return name;
     }
 
+    // Returns the id attribute
     public int getId() {
         return id;
     }
 
-    // generic
-    // creates a new asset object contained in this tile
+    // Creates a new Asset object to contained in this tile
+    // Generically defined, because each asset is created differently
     public void addAsset(int id, String name) {
 
     }
 
-    // creates a new AssetImage object
-    // adds the AssetImage to assetList
+    // Creates a new AssetImage object
+    // Adds the AssetImage to assetList
     public void addAssetImage(int id, String name, String path, int[] size, int[] position) {
         AssetImage image = new AssetImage(id, name, path, size, position);
         assetList.add((DashboardAsset) image);
     }
 
-    // creates a new AssetLink object
-    // adds the AssetLink to assetList
+    // Creates a new AssetLink object
+    // Adds the AssetLink to assetList
     public void addAssetLink(int id, String name, String path) {
 	AssetLink link = new AssetLink(id, name, path);
 	assetList.add((DashboardAsset) link);
     }
     
-    // creates a new AssetList object
-    // adds the AssetList to assetList
+    // Creates a new AssetList object
+    // Adds the AssetList to assetList
     public void addAssetList(int id, String name, String type) {
 	// determine list type
 	char listType;

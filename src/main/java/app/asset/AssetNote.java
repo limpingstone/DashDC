@@ -2,21 +2,30 @@ package app.asset;
 import java.io.*;
 
 public class AssetNote extends DashboardAsset implements Serializable{
+    // stores the note contents
     private String noteText;
 
+    // Constructor
+    // Takes in id and name as parameter inputs
+    // Calls the parent constructor on id and name
+    // Sets the noteText field to a default string
     public AssetNote(int id, String name) {
 	super(id, name);
 	noteText = new String("new note");
     }
-    
+
+    // Takes a String contents
+    // Sets the noteText attribute to the String contents
     public void setContents(String contents){
         this.noteText = contents;
     }
 
+    // Returns the noteText attribute
     public String getContents(){
         return this.noteText;
     }
 
+    // Returns a String of the HTML to display the AssetNote 
     @Override
     public String display(){
 	String retStr = "";

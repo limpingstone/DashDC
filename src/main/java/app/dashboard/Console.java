@@ -53,6 +53,7 @@ public class Console {
         consoleFrame.setVisible(true);
     }
 
+    // STUB
     public static void startSetup() {
 
     }
@@ -91,6 +92,7 @@ public class Console {
         }
     }
 
+    /* STUBS */
     public static void closeCustomizationTool() {
 
     }

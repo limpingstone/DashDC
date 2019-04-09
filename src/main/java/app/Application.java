@@ -12,13 +12,13 @@ import app.dashboard.*;
 @SpringBootApplication
 @RestController
 public class Application {
-	// Temporary public to test dashboard controller (PROTO)
+	// Temporary public to test dashboard controller 
 	public static Dashboard dashboard;
-	// Stores the current page being viewed (PROTO)
+	// Stores the current page being viewed 
 	public static Page currentPage;
-	// Stores the current tiles (PROTO)
+	// Stores the current tiles 
 	public static Tile currentTile;
-	// Stores current assets (PROTO)
+	// Stores current assets 
 	public static DashboardAsset currentAsset;
 
 	// Declares the types of assets available

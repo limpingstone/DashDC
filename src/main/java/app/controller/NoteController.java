@@ -18,6 +18,7 @@ import app.dashboard.Tile;
 
 @Controller
 public class NoteController {
+
     // Controller which handles all requests to edit the list
     @RequestMapping("**/editnote")
     public String editNote(Model model, @ModelAttribute FormCapture form) {
@@ -43,7 +44,10 @@ public class NoteController {
 
         return "editNote";
     }
-
+    
+    // Executed when the user has submitted edits to the note
+    // Edits the note asset to save changes
+    // Points the web browser to previous page
     @RequestMapping("**/executeeditnote")
     public RedirectView executeEditNote(@ModelAttribute FormCapture form) {
         // Get AssetNote object to edit

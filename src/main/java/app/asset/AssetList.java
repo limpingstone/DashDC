@@ -23,17 +23,17 @@ public class AssetList extends DashboardAsset implements Serializable {
 		 */
 	}
 
-	// Returns type attribute
+	// Returns the type attribute
 	public char getType() {
 		return type;
 	}
 
-	// sets the type attribute to parameter
+	// Sets the type attribute to parameter
 	public void setType(char type) {
 		this.type = type;
 	}
 
-	// returns the List of string contents
+	// Returns the List of string contents
 	public List<String> getListContents() {
 		return listContents;
 	}

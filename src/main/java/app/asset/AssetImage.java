@@ -7,7 +7,10 @@ public class AssetImage extends DashboardAsset implements Serializable {
     // String to hold image path.
     private String imagePath;
 
-    // Constructor, takes id, name, path, size and position for the asset
+    // Constructor,
+    // Takes parameters id, name, path, size, and position for the asset
+    // Calls the parent constructor with id and name nputs
+    // Sets the rest of the field variables to the parameter inputs
     public AssetImage(int id, String name, String imagePath, int[] size, int[] position) {
         super(id, name);
         this.imagePath = imagePath;
@@ -15,17 +18,17 @@ public class AssetImage extends DashboardAsset implements Serializable {
         this.position = position;
     }
 
-    // Sets the path to the image
+    // Sets the imagePath field variable to the input parameter
     public void setPath(String imagePath) {
         this.imagePath = imagePath;
     }
 
-    // Gets the path for the image
+    // Returns the imagePath field for the image
     public String getPath() {
         return imagePath;
     }
 
-    // Generates the HTML code to display the image
+    // Returns a String of the HTML code to display the image asset
     @Override
     public String display() {
         //return "/fragments/assets.html :: testFrag";

@@ -7,16 +7,19 @@ import java.io.*;
 public class Dashboard implements Serializable {
     private List<Page> pageList;
 
+    // Constructor
+    // Instantiates an instance of ArrayList
+    // Sets the pageList field to the the empty ArrayList
     public Dashboard() {
         pageList = new ArrayList<Page>();
     }
 
-    // returns a list of page objects
+    // Returns a List of Page objects that this Dashboard contains
     public List<Page> getPages() {
         return pageList;
     }
 
-    // returns a list of page names
+    // Returns a List of Strings of Page names
     public List<String> getPageNames() {
         List<String> names = new ArrayList<String>();
         for (int i = 0; i < pageList.size(); i++) {
@@ -26,7 +29,7 @@ public class Dashboard implements Serializable {
 
     }
 
-    // returns the page object with specified id
+    // Returns the Page object with specified id
     public Page getDashboardPage(int id) {
         for (int i = 0; i < pageList.size(); i++) {
             if (id == pageList.get(i).getId())
@@ -35,7 +38,7 @@ public class Dashboard implements Serializable {
         return null; // should be an error if not found
     }
 
-    // creates a new page on the dashboard w/ the specified name and id
+    // Creates a new Page object on the dashboard w/ the specified name and id
     public void addPage(int id, String name) {
         Page newPage = new Page(id, name);
         pageList.add(newPage);

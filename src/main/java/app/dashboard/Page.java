@@ -9,24 +9,30 @@ public class Page implements Serializable {
     int id;
     List<Tile> tileList;
 
+    // Default constructor
+    // Sets the default id and name attribute
+    // Instantiates the tileList
     public Page() {
         name = "Default.";
         id = 0;
         tileList = new ArrayList<Tile>();
     }
 
+    // Overloaded constructor
+    // Sets the id and name attribute to the input parameter
+    // Instantiates the tileList
     public Page(int pageID, String pageName) {
         name = pageName;
         id = pageID;
         tileList = new ArrayList<Tile>();
     }
 
-    // returns a list of tile objects
+    // Returns a List of Tile objects contained in the page
     public List<Tile> getTiles() {
         return tileList;
     }
 
-    // returns a list of tile names
+    // Returns a List of Strings of Tile names
     public List<String> getTileNames() {
         List<String> names = new ArrayList<String>();
         for (int i = 0; i < tileList.size(); i++) {
@@ -35,7 +41,7 @@ public class Page implements Serializable {
         return names;
     }
 
-    // returns the tile object with specified id
+    // Returns the Tile object with specified id
     public Tile getTile(int id) {
         for (int i = 0; i < tileList.size(); i++) {
             if (id == tileList.get(i).getId())
@@ -44,15 +50,18 @@ public class Page implements Serializable {
         return null; // should be an error if not found
     }
 
+    // Returns the name attribute
     public String getName() {
         return name;
     }
 
+    // Returns id attribute
     public int getId() {
         return id;
     }
 
-    // creates a new tile object contained in this Page
+    // Creates a new Tile object to be contained in this Page
+    // Adds the Tile object to the list of tiles
     public void addTile(int id, String name) {
         Tile newTile = new Tile(id, name);
         tileList.add(newTile);

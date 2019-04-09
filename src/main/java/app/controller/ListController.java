@@ -18,6 +18,7 @@ import app.dashboard.Tile;
 
 @Controller
 public class ListController {
+
     // Controller which handles all requests to edit the list
     @RequestMapping("**/editlist")
     public String editList(Model model, @ModelAttribute FormCapture form) {
@@ -49,6 +50,9 @@ public class ListController {
         return "editList";
     }
 
+    // Executed when the user has submitted edits to the list
+    // Edits the list asset to save changes
+    // Points the web browser to previous page
     @RequestMapping("**/executeeditlist")
     public RedirectView executeEditList(@ModelAttribute FormCapture form) {
         // Get AssetList object to edit

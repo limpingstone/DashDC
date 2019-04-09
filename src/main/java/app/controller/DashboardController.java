@@ -16,6 +16,7 @@ import app.FormCapture;
 public class DashboardController {
 
       // Default dashboard address
+      // Passes the currentPage, pageList, tileList attributes from Application into the thymeleaf templates
       @GetMapping("/")
       public String dashboard(Model model, @ModelAttribute FormCapture form) {
 
@@ -33,6 +34,7 @@ public class DashboardController {
       }
 
       // Request handler for changing the dashboard page
+      // Points web browser to / root
       @RequestMapping("/changeDashboard")
       public RedirectView changeDashboard(@ModelAttribute FormCapture form) {
             //Update the current page

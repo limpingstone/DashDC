@@ -23,6 +23,7 @@ public class CustomizeDashboardController {
     }
 
     // Handles the request to create a new page
+    // Points web browser to /customize
     @RequestMapping("/customize/newpage")
     public RedirectView newPage(@ModelAttribute FormCapture form) {
 
@@ -31,6 +32,7 @@ public class CustomizeDashboardController {
     }
 
     // Handles the request to select the page to be edited
+    // Points web browser to /customize/page
     @RequestMapping("/customize/selectpage")
     public RedirectView selectPage(@ModelAttribute FormCapture form) {
 
@@ -41,6 +43,7 @@ public class CustomizeDashboardController {
     }
 
     // Handles requests to customize a page
+    // Serves up customizePage template 
     @RequestMapping("/customize/page/")
     public String customizePage(Model model, @ModelAttribute FormCapture form) {
 
@@ -52,6 +55,7 @@ public class CustomizeDashboardController {
     }
 
     // Handles creating a new tile on the current page
+    // Points web browser to /customize/page
     @RequestMapping("/customize/page/newtile")
     public RedirectView newTile(@ModelAttribute FormCapture form) {
 
@@ -61,6 +65,7 @@ public class CustomizeDashboardController {
     }
 
     // Handles selecting the tile to be edited
+    // Points web browser to /customize/page/tile
     @RequestMapping("/customize/page/selecttile")
     public RedirectView selectTile(@ModelAttribute FormCapture form) {
 
@@ -70,6 +75,7 @@ public class CustomizeDashboardController {
     }
 
     // Handles the customize tile page
+    // Serves up the customizeTile template
     @GetMapping("/customize/page/tile/")
     public String customizeTile(Model model) {
 
@@ -80,6 +86,7 @@ public class CustomizeDashboardController {
     }
 
     // Handles creating a new asset inside the tile
+    // Serves up the newAsset template
     @RequestMapping("/customize/page/tile/newasset")
     public String newAsset(Model model, @ModelAttribute FormCapture form) {
 
@@ -89,6 +96,7 @@ public class CustomizeDashboardController {
     }
 
     // Handles making the new image
+    // Points web browser to /customize/page/tile
     @RequestMapping("/customize/page/tile/newimage")
     public RedirectView newImage(@ModelAttribute FormCapture form) {
 
@@ -101,6 +109,7 @@ public class CustomizeDashboardController {
     }
 
     // Handles making the new list
+    // Points web browser to /customize/page/tile
     @RequestMapping("/customize/page/tile/newlist")
     public RedirectView newList(@ModelAttribute FormCapture form) {
 
@@ -109,6 +118,8 @@ public class CustomizeDashboardController {
         return new RedirectView("/customize/page/tile/");
     }
 
+    // Handles making the new note
+    // Points web browser to /customize
     @RequestMapping("/customize/page/tile/newnote")
     public RedirectView newNote(@ModelAttribute FormCapture form) {
         Application.currentTile.addAssetNote(form.getId(), form.getName());
@@ -116,6 +127,8 @@ public class CustomizeDashboardController {
         return new RedirectView("/customize/page/tile/");
     }
 
+    // Handles making the new link
+    // Points web browser to /customize/page/tile/
     @RequestMapping("/customize/page/tile/newlink")
     public RedirectView newLink(@ModelAttribute FormCapture form) {
         Application.currentTile.addAssetLink(form.getId(), form.getName(), form.getLink());
