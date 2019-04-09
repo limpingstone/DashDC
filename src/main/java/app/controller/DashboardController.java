@@ -1,17 +1,45 @@
+
 package app.controller;
 
 import org.springframework.ui.Model; //For Model
+
 import org.springframework.stereotype.Controller; //For @Controller
 import org.springframework.web.bind.annotation.GetMapping; //For @GetMapping
-//import org.springframework.web.bind.annotation.RequestParam; //For @RequestParam
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
 
 import app.Application;
+import app.FormCapture;
 
 @Controller
 public class DashboardController {
-   @GetMapping("/")
-   public String dashboard(Model model) {
-      model.addAttribute("page", Application.dashboard.getPages());
-      return "dashboard";
-   }
+
+      // Default dashboard address
+      @GetMapping("/")
+      public String dashboard(Model model, @ModelAttribute FormCapture form) {
+
+            // Set default dashboard page if one is not selected
+            if (Application.currentPage == null) {
+                  Application.currentPage = Application.dashboard.getPages().get(0);
+            }
+            
+            //Pass attributes to thymeleaf
+            model.addAttribute("currentPage", Application.currentPage);
+            model.addAttribute("pageList", Application.dashboard.getPages());
+            model.addAttribute("tileList", Application.currentPage.getTiles());
+            
+            return "page";
+      }
+
+      // Request handler for changing the dashboard page
+      @RequestMapping("/changeDashboard")
+      public RedirectView changeDashboard(@ModelAttribute FormCapture form) {
+            //Update the current page
+            Application.currentPage = Application.dashboard.getDashboardPage(form.getId());
+            
+            //Return the user back to dashboard
+            return new RedirectView("/");
+      }
+
 }

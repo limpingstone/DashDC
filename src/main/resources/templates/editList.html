@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Edit List</title>
+</head>
+
+<body>
+    <!-- Editing list instructions -->
+    <h1>Edit List</h1>
+    <h2>Instructions:</h2>
+    <p>You can edit the name by changing the textbox. The list contents are in the big text box below.
+        Each list element is delimited by a *. You can add new list elements by adding new * and the list contents. You
+        can delete list elements by removing a * and its contents. You can edit list element content itself by not
+        changing the *.
+    </p>
+
+    <!-- Edit list form -->
+    <form action="executeeditlist" method="post">
+        Name: <input type="text" name="name" th:value="${listAsset.getName()}">
+        <input type="hidden" name="tileId" th:value="${containingTile.getId()}">
+        <input type="hidden" name="assetId" th:value="${listAsset.getId()}">
+        
+        <!-- Thymeleaf if statement for ul or ol -->
+        <th:block th:switch="${listAsset.getType()}">
+            <th:block th:case="'o'">
+                <input th:case="'o'" type='radio' name='type' value='unordered'> unordered
+                <input type='radio' name='type' value='ordered' checked> ordered
+            </th:block>
+            <th:block th:case="'u'">
+                <input type='radio' name='type' value='unordered' checked> unordered
+                <input type='radio' name='type' value='ordered'> ordered
+            </th:block>
+        </th:block>
+
+        <!-- Shows the contents and allows edit -->
+        <h2>Contents</h2>
+        <textarea rows='25' cols='100' name='text' th:text="${listAsset.contentEdit()}"></textarea>
+        <input type='submit' name='submit' value='Confirm edit'>
+    </form>
+</body>
+
+</html>

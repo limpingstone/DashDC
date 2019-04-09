@@ -28,6 +28,8 @@ public class AssetImage extends DashboardAsset implements Serializable {
     // Generates the HTML code to display the image
     @Override
     public String display() {
-        return "<img src=\"" + imagePath + "\" style=\"width:" + size[0] + "; height: " + size[1] + ";\"><br>";
+        //return "/fragments/assets.html :: testFrag";
+        //return "../../../resources/templates/fragments/assets.html :: image(src = \"" + this.imagePath + "\", width = \"" + this.size[0] + "\", height = \"" + this.size[1] + "\")";
+        return "<img src=\"" + imagePath + "\" style=\"width:" + size[0] + "px; height: " + size[1] + "px;\"><br>";
     }
 }
