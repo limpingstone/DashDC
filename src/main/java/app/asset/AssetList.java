@@ -18,9 +18,10 @@ public class AssetList extends DashboardAsset implements Serializable{
 	super(id, name);
 	this.type = type;
 	listContents = new ArrayList<String>();
-	/* for prototyping only */
+	/* for prototyping only
 	listContents.add("hello");
 	listContents.add("calvin");
+	*/
     }
 
     // Returns type attribute

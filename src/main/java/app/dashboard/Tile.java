@@ -67,6 +67,13 @@ public class Tile implements Serializable {
         AssetImage image = new AssetImage(id, name, path, size, position);
         assetList.add((DashboardAsset) image);
     }
+
+    // creates a new AssetLink object
+    // adds the AssetLink to assetList
+    public void addAssetLink(int id, String name, String path) {
+	AssetLink link = new AssetLink(id, name, path);
+	assetList.add((DashboardAsset) link);
+    }
     
     // creates a new AssetList object
     // adds the AssetList to assetList
@@ -81,6 +88,13 @@ public class Tile implements Serializable {
 	AssetList list = new AssetList(id, name, listType);
 	assetList.add((DashboardAsset) list);
 	
+    }
+
+    // creates a new AssetNote object
+    // ads the AssetNote to assetList
+    public void addAssetNote(int id, String name) {
+	AssetNote note = new AssetNote(id, name);
+	assetList.add((DashboardAsset) note);
     }
     
     public String display() {

@@ -30,9 +30,9 @@ public class Application {
 	private static DashboardAsset currentAsset;
 
 	// Declares the types of assets available
-	private static final String[] ASSET_TYPES = new String[] { "image", "note", "list" };
+    private static final String[] ASSET_TYPES = new String[] { "image", "note", "list", "link" };
 
-	// Controll page address
+	// Control page address
 	@RequestMapping("/page")
 	public String pageOptions(@ModelAttribute FormCapture form) {
 		currentPage = dashboard.getDashboardPage(form.getId());
@@ -52,7 +52,7 @@ public class Application {
 		//Clear the prototyped display
 		String retStr = "";
 		//Add the page name to the view
-		retStr += "You are viewinzg page: " + currentPage.getName() + "<br>";
+		retStr += "You are viewing page: " + currentPage.getName() + "<br>";
 
 		List<Tile> tiles = currentPage.getTiles();
 		/* move this to Page.java */
@@ -119,7 +119,11 @@ public class Application {
 		    retStr += newImageHTML();
 		else if ( type.equals("list") )
 		    retStr += newListHTML();
-
+		else if (type.equals("note"))
+		    retStr += newNoteHTML();
+		else if (type.equals("link"))
+		    retStr += newLinkHTML();
+		
 		return retStr;
 	}
 
@@ -127,15 +131,35 @@ public class Application {
     private String newImageHTML() {
 	return "<form action='newimage' method='post'>Name: <input type='text' name='name'> <br>ID: <input type='number' name='id'> <br>Link to image: <input type='text' name='link'> <br>Size x: <input type='number' name='xsize'> y: <input type='number' name='ysize'> <br>Position x: <input type='number' name='xpos'> y: <input type='number' name='ypos'> <br><input type='submit' name='submit'> <br></form>";
     }
-    
+
+    // Creates the new image asset specified by user input
         @RequestMapping("/newimage")
 	public String newImage(@ModelAttribute FormCapture form) {
 		int[] size = new int[] { form.getXsize(), form.getYsize() };
 		int[] position = new int[] { form.getXpos(), form.getYpos() };
 		currentTile.addAssetImage(form.getId(), form.getName(), form.getLink(), size, position);
-		return tileOptions();
+		return pageOptions();
+		//return tileOptions();
 	}
 
+    // Returns the HTML string necessary to gather user input in creating a new link asset
+    private String newLinkHTML() {
+	String retStr = "";
+	retStr += "<form action='newlink' method='post'>";
+	retStr += "Name: <input type='text' name='name'> <br>";
+	retStr += "ID: <input type='number' name='id'><br>";
+	retStr += "Link to webpage: <input type='text' name='link'> <br>";
+	retStr += "<input type='submit' name='submit'> <br></form>";
+	return retStr;
+    }
+
+    // Creates the new link asset specified by user input
+    @RequestMapping("/newlink")
+    public String newLink(@ModelAttribute FormCapture form) {
+	currentTile.addAssetLink(form.getId(), form.getName(), form.getLink());
+	return pageOptions(); // go back to dashboard page
+    }
+	
     // Returns the HTML string necessary to gather user input in creating a new list asset
     private String newListHTML() {
 	String retStr = "<form action='newlist' method='post'>List Title: <input type='txt' name='name'> <br>ID: <input type='number' name='id'>";
@@ -152,7 +176,6 @@ public class Application {
 	currentTile.addAssetList(form.getId(), form.getName(), form.getType());
 	return tileOptions();
     }
-
 
     // Gathers the user input on how to edit list
     @RequestMapping("/editlist")
@@ -187,7 +210,8 @@ public class Application {
 	    retStr += "<input type='radio' name='type' value='unordered' checked> unordered <br>";
 	    retStr += "<input type='radio' name='type' value='ordered'> ordered <br>";
 	}
-	retStr += "Conents: <br> <textarea rows='25' cols='100' name='text'>" + listAsset.contentEdit() + "</textarea> <br>";
+	// Contents
+	retStr += "Contents: <br> <textarea rows='25' cols='100' name='text'>" + listAsset.contentEdit() + "</textarea> <br>";
 	retStr += "<input type='submit' name='submit' value='Confirm edit'>";
 	retStr += "</form>";
 	
@@ -211,6 +235,67 @@ public class Application {
 	//return form.getText();
         return pageOptions();
     }
+
+    // Returns the HTML string necessary to gather user input in creating a new note asset
+    private String newNoteHTML() {
+	String retStr = "<form action='newnote' method='post'>Note Title: <input type='txt' name='name'> <br>";
+	retStr += "ID: <input type='number' name='id'>";
+	retStr += "<input type='submit' name='submit'> <br>";
+	retStr += "</form>";
+	return retStr;
+    }
+
+    @RequestMapping("/newnote")
+    public String newNote(@ModelAttribute FormCapture form) {
+	currentTile.addAssetNote(form.getId(), form.getName());
+	return tileOptions();
+    }
+
+    // Gathers the user input on how to edit note
+    @RequestMapping("/editnote")
+    public String editNote(@ModelAttribute FormCapture form) {
+	// find the asset object to edit
+	DashboardAsset asset = null;
+	Tile tile = null; 
+	List<Tile> tiles = currentPage.getTiles();
+	for ( int i = 0; i < tiles.size(); i++ ) {
+	    tile = tiles.get(i);
+	    asset = tile.getAsset(form.getId());
+	    if ( asset != null )
+		break;
+	}
+	if ( asset == null || tile == null) // asset not found
+	    return "Note asset not found.";
+
+	// the AssetNote that wants to be edited
+	AssetNote noteAsset = (AssetNote) asset;
+	String retStr = "";
+	retStr += "<form action='executenoteedit' method='post'>";
+	retStr += "Name: <input type='text' name='name' value='" + noteAsset.getName() + "'><br>";
+	retStr += "<input type='hidden' name='tileId' value='" + tile.getId() + "'>";
+	retStr += "<input type='hidden' name='assetId' value='" + noteAsset.getId() + "'>";
+
+	// Contents
+	retStr += "Contents: <br> <textarea rows='25' cols='100' name='text'>" + noteAsset.getContents() + "</textarea> <br>";
+	retStr += "<input type='submit' name='submit' value='Confirm edit'>";
+	retStr += "</form>";
+
+	return retStr;
+    }
+
+    // Edits the NoteAsset object based on user input received through /editnote
+    @RequestMapping("/executenoteedit")
+    public String executeNoteEdit(@ModelAttribute FormCapture form) {
+	// get AssetNote object to edit
+	AssetNote noteAsset = (AssetNote) (currentPage.getTile(form.getTileId()).getAsset(form.getAssetId()));
+
+	// perform edit functions
+	noteAsset.setName( form.getName() );
+	noteAsset.setContents( form.getText() );
+
+	return pageOptions(); // go back to dashboard page
+    }
+
     
 	// for prototyping only, handles loading the old dashboard save.
 	public static void setup() {
@@ -224,6 +309,7 @@ public class Application {
 		
 	}
 
+    
 	//Handles saving the dashboard.
 	@RequestMapping("/save")
 	public static String save() {
