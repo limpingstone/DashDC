@@ -50,7 +50,7 @@ public class ListController {
     }
 
     @RequestMapping("**/executeeditlist")
-    public RedirectView changeDashboard(@ModelAttribute FormCapture form) {
+    public RedirectView executeEditList(@ModelAttribute FormCapture form) {
         // Get AssetList object to edit
         AssetList listAsset = (AssetList) (Application.currentPage.getTile(form.getTileId())
                 .getAsset(form.getAssetId()));

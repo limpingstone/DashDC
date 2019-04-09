@@ -25,7 +25,7 @@
     <h1 th:text="${currentPage.name}"></h1>
 
     <!-- Thymeleaf each for each tile -->
-    <div th:each="tile : ${tileList}">
+    <div th:each="tile : ${tileList}" style="border-style: solid">
         <h2 th:text="${tile.getName()}"></h2>
 
         <!-- Thymeleaf each to display each asset -->

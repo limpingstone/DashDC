@@ -26,7 +26,7 @@ public class Application {
 	public static DashboardAsset currentAsset;
 
 	// Declares the types of assets available
-	public static final String[] ASSET_TYPES = new String[] { "image", "note", "list" };
+	public static final String[] ASSET_TYPES = new String[] { "image", "note", "list", "link" };
 
 	// for prototyping only, handles loading the old dashboard save.
 	public static void setup() {

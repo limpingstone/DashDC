@@ -20,10 +20,10 @@ public class AssetNote extends DashboardAsset implements Serializable{
     @Override
     public String display(){
 	String retStr = "";
-	// display title/name
+	// Display title/name
 	retStr += "<b>" + getName() + "</b>";
-	// display note contents
-	// replace all \n with <br> to render newlines in HTML properly
+	// Display note contents
+	// Replace all \n with <br> to render newlines in HTML properly
 	retStr += "<p>" + noteText.replaceAll("\n", "<br>") + "</p>";
 
 	// option to edit note

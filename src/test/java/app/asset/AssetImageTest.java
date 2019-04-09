@@ -66,7 +66,7 @@ public class AssetImageTest {
 	assetImage = new AssetImage(20, "image1", "link", new int[] {200, 210}, new int[] {2, 2});
     
     //Deprecated test
-    //assertEquals(assetImage.display(), "<img src=\"link\" style=\"width:200; height: 210;\"><br>");
+    assertEquals(assetImage.display(), "<img src=\"link\" style=\"width:200px; height: 210px;\"><br>");
     }
 		     
 	
