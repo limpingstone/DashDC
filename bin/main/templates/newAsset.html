@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Editing page: </title>
+</head>
+
+<body>
+    <h1>Customize User Dashboard</h1>
+    <h2>Creating new asset:</h2>
+    <th:block th:switch="${type}">
+        <div th:case="'image'">
+                <form action='newimage' method='post'>
+                    Name: <input type='text' name='name'> 
+                    ID: <input type='number' name='id'> 
+                    Link to image: <input type='text' name='link'> 
+                    Size x: <input type='number' name='xsize'>
+                    y: <input type='number' name='ysize'>
+                    Position x: <input type='number' name='xpos'> y: <input type='number' name='ypos'>
+                    <input type='submit' name='submit'>
+                </form>
+        </div>
+        <div th:case="'list'">
+                <form action='newlist' method='post'>
+                    List Title: <input type='txt' name='name'> 
+                    ID: <input type='number' name='id'>
+                    List Type: <input type='radio' name='type' value='unordered'>
+                    unordered <input type='radio' name='type' value='ordered'> ordered <input type='submit' name='submit'>
+                </form>
+        </div>
+    </th:block>
+</body>
+
+</html>

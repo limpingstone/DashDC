@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Page</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
-    <h1 th:text="${page.name}"></h1>
+    <form action="/changeDashboard" method="POST">
+        <select name="id">
+            <option th:each="page : ${pageList}" th:value="${page.id}" th:text="${page.name}">
+            </option>
+        </select>
+        <input type="submit" name="submit">
+    </form>
+    <!--
+    <form th:each="page : ${pageList}" action="/" method="POST" th:id="${page.id}">
+        <input type = "submit" th:form="${page.id}" th:name="${page.id}" th:value="${page.name}">
+    </form>
+    -->
+
+    <h1 th:text="${currentPage.name}"></h1>
     <div th:each="tile : ${tileList}">
         <h2 th:text="${tile.getName()}"></h2>
         <div th:each="asset : ${tile.getAssets()}">
-            <!--<div th:replace="${asset.display()}"></div>-->
             <div th:remove="tag" th:utext="${asset.display()}"></div>
         </div>
     </div>

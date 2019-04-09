@@ -9,7 +9,6 @@
    <h1>Control Panel:</h1>
    <h2 th:text="'User Mode: ' + ${mode}"></h2>
    <form action="#" data-th-action="@{/action/edit}" data-th-object="${model}" method="post">
-
       <button type="submit" name="action" value="basic">Basic</button>
       <button type="submit" name="action" value="advanced">Advanced</button>
    </form>
