@@ -11,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.swing.*;
-import java.awt.FlowLayout;
-
-import java.util.List;
+import java.awt.*;
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
 import java.lang.ProcessBuilder.Redirect;
+
 import app.asset.*;
 import app.dashboard.*;
 
@@ -314,6 +316,34 @@ public class Application {
 		JButton launchDashboardButton = new JButton("Launch Dashboard");
 		JButton launchCustomizeButton = new JButton("Customization Tool");
 		JButton killJarButton = new JButton("Exit");
+
+		launchDashboardButton.addActionListener(e -> {
+			String url = "http://localhost:8080";
+		    try {
+		        if (Desktop.isDesktopSupported())
+		            Desktop.getDesktop().browse(new URI(url));
+		        else
+		            Runtime.getRuntime().exec("xdg-open " + url);
+		    } catch (IOException | URISyntaxException ex) {
+		        System.out.println("Cannot open browser with url: " + url);
+		    }
+		});
+
+		launchCustomizeButton.addActionListener(e -> {
+			String url = "http://localhost:8080/customization-tool";
+		    try {
+		        if (Desktop.isDesktopSupported())
+		            Desktop.getDesktop().browse(new URI(url));
+		        else
+		            Runtime.getRuntime().exec("xdg-open " + url);
+		    } catch (IOException | URISyntaxException ex) {
+		        System.out.println("Cannot open browser with url: " + url);
+		    }
+		});
+
+		killJarButton.addActionListener(e -> {
+		    System.exit(0);
+		});
 
 		panel.add(launchDashboardButton);
 		panel.add(launchCustomizeButton);
