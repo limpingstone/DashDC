@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import javax.swing.*;
+import java.awt.FlowLayout;
+
 import java.util.List;
 import java.io.*;
 import java.lang.ProcessBuilder.Redirect;
@@ -299,6 +302,26 @@ public class Application {
     
 	// for prototyping only, handles loading the old dashboard save.
 	public static void setup() {
+
+		JFrame consoleFrame = new JFrame("Dash Console");
+		consoleFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        consoleFrame.setSize(320, 240);
+
+        JPanel panel = new JPanel();
+        FlowLayout layout = new FlowLayout();
+        panel.setLayout(layout);
+
+		JButton launchDashboardButton = new JButton("Launch Dashboard");
+		JButton launchCustomizeButton = new JButton("Customization Tool");
+		JButton killJarButton = new JButton("Exit");
+
+		panel.add(launchDashboardButton);
+		panel.add(launchCustomizeButton);
+		panel.add(killJarButton);
+
+		consoleFrame.getContentPane().add(panel);
+		consoleFrame.setVisible(true);
+
 		// check if save file exists
 		File save = new File("src/main/save/dash_save.ser");
 		
@@ -308,7 +331,6 @@ public class Application {
 			Application.dashboard = new Dashboard();
 		
 	}
-
     
 	//Handles saving the dashboard.
 	@RequestMapping("/save")
