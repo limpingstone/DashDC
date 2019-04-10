@@ -2,7 +2,6 @@ package app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
@@ -36,13 +35,6 @@ public class Application {
 			Application.dashboard = load();
 		else
 			Application.dashboard = new Dashboard();
-	}
-
-	// Handles saving the dashboard.
-	@RequestMapping("/save")
-	public static String save() {
-		ByteCode.generateSaveFile(dashboard, "src/main/save/dash_save.ser");
-		return "Your dashboard has been saved.";
 	}
 
 	// returns a dashboard object from save file
