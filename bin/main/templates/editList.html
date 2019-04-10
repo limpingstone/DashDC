@@ -23,7 +23,7 @@
         <!-- Thymeleaf if statement for ul or ol -->
         <th:block th:switch="${listAsset.getType()}">
             <th:block th:case="'o'">
-                <input th:case="'o'" type='radio' name='type' value='unordered'> unordered
+                <input type='radio' name='type' value='unordered'> unordered
                 <input type='radio' name='type' value='ordered' checked> ordered
             </th:block>
             <th:block th:case="'u'">
