@@ -21,7 +21,6 @@ public class DashboardController {
       public String dashboard(Model model, @ModelAttribute FormCapture form) {
 
 	  if ( Application.dashboard.getPages().size() == 0 ) { // nothing in dashboard yet
-	      //Application.currentPage = null;
 	      //Pass attributes to thymeleaf
 	      model.addAttribute("currentPage", null);
 	      model.addAttribute("pageList", Application.dashboard.getPages());
