@@ -20,15 +20,26 @@ public class DashboardController {
       @GetMapping("/")
       public String dashboard(Model model, @ModelAttribute FormCapture form) {
 
-            // Set default dashboard page if one is not selected
-            if (Application.currentPage == null) {
-                  Application.currentPage = Application.dashboard.getPages().get(0);
-            }
+	  if ( Application.dashboard.getPages().size() == 0 ) { // nothing in dashboard yet
+	      //Application.currentPage = null;
+	      //Pass attributes to thymeleaf
+	      model.addAttribute("currentPage", null);
+	      model.addAttribute("pageList", Application.dashboard.getPages());
+	      model.addAttribute("tileList", null);
+	      
+	  }
+	  else {
+	      // Set default dashboard page if one is not selected
+	      if (Application.currentPage == null) {
+		  Application.currentPage = Application.dashboard.getPages().get(0);
+		  //Application.currentPage = Application.dashboard.getPages();		  
+	      }
+	      //Pass attributes to thymeleaf
+	      model.addAttribute("currentPage", Application.currentPage);
+	      model.addAttribute("pageList", Application.dashboard.getPages());
+	      model.addAttribute("tileList", Application.currentPage.getTiles());	      
+	  }
             
-            //Pass attributes to thymeleaf
-            model.addAttribute("currentPage", Application.currentPage);
-            model.addAttribute("pageList", Application.dashboard.getPages());
-            model.addAttribute("tileList", Application.currentPage.getTiles());
             
             return "page";
       }

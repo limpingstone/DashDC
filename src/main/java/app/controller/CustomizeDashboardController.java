@@ -85,6 +85,17 @@ public class CustomizeDashboardController {
         return "customizeTile";
     }
 
+
+    // Handles deleting an asset inside the tile
+    // Serves up the customizeTile template
+    @GetMapping("/customize/page/tile/deleteasset")
+    public RedirectView deleteAsset(@ModelAttribute FormCapture form) {
+
+	Application.currentTile.deleteAsset(form.getId()); // delete the asset with this id
+	// go back to customize tile page
+	return new RedirectView("/customize/page/tile");
+    }
+    
     // Handles creating a new asset inside the tile
     // Serves up the newAsset template
     @RequestMapping("/customize/page/tile/newasset")

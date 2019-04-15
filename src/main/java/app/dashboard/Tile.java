@@ -63,6 +63,18 @@ public class Tile implements Serializable {
         return id;
     }
 
+    
+    // Deletes the Asset object with id matching the parameter from this Tile
+    // If there is no such asset with matching id, nothing is deleted
+    public void deleteAsset(int id) {
+	for (int i = 0; i < assetList.size(); i++ ) {
+	    // found where the asset is in list
+	    if ( id == assetList.get(i).getId() )
+		assetList.remove(i); 
+	}
+	
+    }
+    
     // Creates a new Asset object to contained in this tile
     // Generically defined, because each asset is created differently
     public void addAsset(int id, String name) {

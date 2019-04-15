@@ -14,9 +14,16 @@
     </div>
 
     <!-- Selecting the asset to be edited -->
-    <h2>Here are the assets that currently exist:</h2>
+    <h2>Delete an Asset:</h2>
     <p>Select which one to edit:</p>
-
+    <form action="deleteasset" method="POST">
+      <select name="id">
+	<option th:each="asset : ${assetList}" th:value="${asset.id}" th:text="${asset.name}">
+	</option>
+      </select>
+      <input type="submit" name="submit">
+    </form>
+    
     <!-- Adding new assets -->
     <h2>Add a new asset:</h2>
     <form action="newasset" method="POST">
