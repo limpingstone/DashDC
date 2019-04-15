@@ -19,7 +19,7 @@
 
     <!-- Selecting the tile to be edited -->
     <h2>Here are the tiles that currently exist:</h2>
-    <p>Select which one to edit:</p>
+    <p>Select which tile to edit:</p>
     <form action="selecttile" method="POST">
         <select name="id">
             <option th:each="tile : ${tileList}" th:value="${tile.id}" th:text="${tile.name}">
@@ -28,22 +28,23 @@
         <input type="submit" name="submit">
     </form>
 
-    <!-- Deleting existing tiles -->
-    <h2>Delete a tile:</h2>
-    <form action="deletetile" method="POST">
-      <select name="id">
-	<option th:each="tile : ${tileList}" th:value="${tile.id}" th:text="${tile.name}">
-	</option>
-      </select>
-      <input type="submit" name="submit">
-    </form>
-
     <!-- Adding new tiles -->
     <h2>Add a new tile:</h2>
     <form action="newtile" method="POST">
         <p>Name:</p><input type="text" name="name">
         <p>ID:</p><input type="number" name="id">
         <p></p><input type="submit" name="submit">
+    </form>
+
+    <!-- Deleting existing tiles -->
+    <h2>Delete a tile:</h2>
+    <p>Select which tile to delete:</p>
+    <form action="deletetile" method="POST">
+        <select name="id">
+            <option th:each="tile : ${tileList}" th:value="${tile.id}" th:text="${tile.name}">
+            </option>
+        </select>
+        <input type="submit" name="submit">
     </form>
 
     <!-- Saving the dashboard -->

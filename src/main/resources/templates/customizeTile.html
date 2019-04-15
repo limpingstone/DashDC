@@ -13,22 +13,23 @@
         <div th:remove="tag" th:utext="${asset.display()}"></div>
     </div>
 
-    <!-- Selecting the asset to be edited -->
-    <h2>Delete an Asset:</h2>
-    <p>Select which one to edit:</p>
-    <form action="deleteasset" method="POST">
-      <select name="id">
-	<option th:each="asset : ${assetList}" th:value="${asset.id}" th:text="${asset.name}">
-	</option>
-      </select>
-      <input type="submit" name="submit">
-    </form>
-    
     <!-- Adding new assets -->
     <h2>Add a new asset:</h2>
+    <p>Select which type of asset to add</p>
     <form action="newasset" method="POST">
         <select name="type">
             <option th:each="assetType : ${assetTypes}" th:value="${assetType}" th:text="${assetType}"></option>
+        </select>
+        <input type="submit" name="submit">
+    </form>
+
+    <!-- Selecting the asset to be edited -->
+    <h2>Delete an Asset:</h2>
+    <p>Select which asset to delete:</p>
+    <form action="deleteasset" method="POST">
+        <select name="id">
+            <option th:each="asset : ${assetList}" th:value="${asset.id}" th:text="${asset.name}">
+            </option>
         </select>
         <input type="submit" name="submit">
     </form>

@@ -31,6 +31,15 @@ public class CustomizeDashboardController {
         return new RedirectView("/customize/");
     }
 
+    // Handles deleting a page inside the dashboard
+    // Serves up the customizeDashboard template
+    @RequestMapping("/customize/deletepage")
+    public RedirectView deletePage(@ModelAttribute FormCapture form) {
+        Application.dashboard.deletePage(form.getId()); // delete the page w/ this id
+        // go back to customize dashboard page
+        return new RedirectView("/customize/");
+    }
+
     // Handles the request to select the page to be edited
     // Points web browser to /customize/page
     @RequestMapping("/customize/selectpage")
@@ -43,7 +52,7 @@ public class CustomizeDashboardController {
     }
 
     // Handles requests to customize a page
-    // Serves up customizePage template 
+    // Serves up customizePage template
     @RequestMapping("/customize/page/")
     public String customizePage(Model model, @ModelAttribute FormCapture form) {
 
@@ -62,6 +71,16 @@ public class CustomizeDashboardController {
         Application.currentPage.addTile(form.getId(), form.getName());
 
         return new RedirectView("/customize/page/");
+    }
+
+    // Handles deleting a tile inside the page
+    // Serves up the customizePage template
+    @RequestMapping("/customize/page/deletetile")
+    public RedirectView deleteTile(@ModelAttribute FormCapture form) {
+        Application.currentPage.deleteTile(form.getId()); // delete the tile with this id
+        // go back to customize page
+        return new RedirectView("/customize/page/");
+
     }
 
     // Handles selecting the tile to be edited
@@ -85,34 +104,6 @@ public class CustomizeDashboardController {
         return "customizeTile";
     }
 
-    // Handles deleting a page inside the dashboard
-    // Serves up the customizeDashboard template
-    @RequestMapping("/customize/deletepage")
-    public RedirectView deletePage(@ModelAttribute FormCapture form) {
-	Application.dashboard.deletePage(form.getId()); // delete the page w/ this id
-	// go back to customize dashboard page
-	return new RedirectView("/customize/");
-    }
-    
-    // Handles deleting a tile inside the page
-    // Serves up the customizePage template
-    @RequestMapping("/customize/page/deletetile")
-    public RedirectView deleteTile(@ModelAttribute FormCapture form) {
-	Application.currentPage.deleteTile(form.getId()); // delete the tile with this id
-	// go back to customize page
-	return new RedirectView("/customize/page/");
-
-    }
-    
-    // Handles deleting an asset inside the tile
-    // Serves up the customizePage template
-    @RequestMapping("/customize/page/tile/deleteasset")
-    public RedirectView deleteAsset(@ModelAttribute FormCapture form) {
-	Application.currentTile.deleteAsset(form.getId()); // delete the asset with this id
-	// go back to customize page
-	return new RedirectView("/customize/page/");
-    }
-    
     // Handles creating a new asset inside the tile
     // Serves up the newAsset template
     @RequestMapping("/customize/page/tile/newasset")
@@ -121,6 +112,15 @@ public class CustomizeDashboardController {
         model.addAttribute("type", form.getType());
 
         return "newAsset";
+    }
+
+    // Handles deleting an asset inside the tile
+    // Serves up the customizePage template
+    @RequestMapping("/customize/page/tile/deleteasset")
+    public RedirectView deleteAsset(@ModelAttribute FormCapture form) {
+        Application.currentTile.deleteAsset(form.getId()); // delete the asset with this id
+        // go back to customize page
+        return new RedirectView("/customize/page/tile/");
     }
 
     // Handles making the new image
@@ -151,7 +151,7 @@ public class CustomizeDashboardController {
     @RequestMapping("/customize/page/tile/newnote")
     public RedirectView newNote(@ModelAttribute FormCapture form) {
         Application.currentTile.addAssetNote(form.getId(), form.getName());
-        
+
         return new RedirectView("/customize/page/tile/");
     }
 
@@ -160,7 +160,7 @@ public class CustomizeDashboardController {
     @RequestMapping("/customize/page/tile/newlink")
     public RedirectView newLink(@ModelAttribute FormCapture form) {
         Application.currentTile.addAssetLink(form.getId(), form.getName(), form.getLink());
-        
+
         return new RedirectView("/customize/page/tile/");
     }
 

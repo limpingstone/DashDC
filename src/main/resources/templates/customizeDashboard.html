@@ -10,7 +10,7 @@
 
     <!-- Selecting the page to be edited -->
     <h2>Here are the pages that currently exist:</h2>
-    <p>Select which one to edit:</p>
+    <p>Select which page to edit:</p>
     <form action="selectpage" method="POST">
         <select name="id">
             <option th:each="page : ${pageList}" th:value="${page.id}" th:text="${page.name}">
@@ -19,22 +19,23 @@
         <input type="submit" name="submit">
     </form>
 
-    <!-- Deleting an existing page -->
-    <h2>Delete a page:</h2>
-    <form action="deletepage" method="POST">
-      <select name="id">
-	<option th:each="page : ${pageList}" th:value="${page.id}" th:text="${page.name}">
-	</option>
-      </select>
-      <input type="submit" name="submit">
-    </form>
-    
     <!-- Adding new pages -->
     <h2>Add a new page:</h2>
     <form action="newpage" method="POST">
         <p>Name:</p><input type="text" name="name">
         <p>ID:</p><input type="number" name="id">
         <p></p><input type="submit" name="submit">
+    </form>
+
+    <!-- Deleting an existing page -->
+    <h2>Delete a page:</h2>
+    <p>Select which page to delete</p>
+    <form action="deletepage" method="POST">
+        <select name="id">
+            <option th:each="page : ${pageList}" th:value="${page.id}" th:text="${page.name}">
+            </option>
+        </select>
+        <input type="submit" name="submit">
     </form>
 
     <!-- Saving the dashboard -->
