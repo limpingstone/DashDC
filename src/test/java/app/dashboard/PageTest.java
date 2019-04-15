@@ -48,6 +48,24 @@ public class PageTest {
     }
 
     @Test
+    public void testDeleteTile() {
+	// testing the deleteTile() method
+	page = new Page();
+	page.addTile(1, "one");
+	page.addTile(2, "two");
+	page.addTile(3, "three");
+
+	page.deleteTile(2);
+	assertEquals(2, page.getTiles().size()); // two tiles left
+
+	page.deleteTile(3);
+	assertArrayEquals(new String[] {"one"}, page.getTileNames().toArray());
+
+	page.deleteTile(1);
+	assertEquals(0, page.getTiles().size());
+    }
+    
+    @Test
     public void testGetTile() {
 	// testing the getTile() method
 	page = new Page();

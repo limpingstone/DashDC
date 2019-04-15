@@ -48,6 +48,26 @@ public class DashboardTest {
 
 	}
 
+    @Test
+    public void testDeletePage() {
+	// Testing deletePage() method
+	dashboard = new Dashboard();
+
+	dashboard.addPage(1, "one");
+	dashboard.addPage(2, "two");
+	dashboard.addPage(3, "three");
+	
+	dashboard.deletePage(1);
+	assertEquals(2, dashboard.getPages().size()); // 2 pages in dashboard
+	
+	dashboard.deletePage(3);
+	assertArrayEquals(new String[] {"two"}, dashboard.getPageNames().toArray());
+
+	dashboard.deletePage(2);
+	assertEquals(0, dashboard.getPages().size());
+    }
+	
+
 	@Test
 	public void testGetPages() {
 		dashboard = new Dashboard();

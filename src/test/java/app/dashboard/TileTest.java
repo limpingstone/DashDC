@@ -99,6 +99,24 @@ public class TileTest {
     }
 
     @Test
+    public void testDeleteAsset() {
+	tile = new Tile();
+	tile.addAssetImage(1, "image", "path", size, position);
+	tile.addAssetLink(2, "link", "path");
+	tile.addAssetNote(3, "note");
+
+	tile.deleteAsset(1);
+	assertEquals(2, tile.getAssets().size()); // 2 assets left
+
+	tile.deleteAsset(3);
+	assertArrayEquals(new String[] {"link"}, tile.getAssetNames().toArray());
+
+	tile.deleteAsset(2); 
+	assertEquals(0, tile.getAssets().size()); // no assets left
+    }
+    
+	
+    @Test
     public void testAddAssetImage() {
 	tile = new Tile();
 
