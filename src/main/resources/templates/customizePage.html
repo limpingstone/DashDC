@@ -28,6 +28,16 @@
         <input type="submit" name="submit">
     </form>
 
+    <!-- Deleting existing tiles -->
+    <h2>Delete a tile:</h2>
+    <form action="deletetile" method="POST">
+      <select name="id">
+	<option th:each="tile : ${tileList}" th:value="${tile.id}" th:text="${tile.name}">
+	</option>
+      </select>
+      <input type="submit" name="submit">
+    </form>
+
     <!-- Adding new tiles -->
     <h2>Add a new tile:</h2>
     <form action="newtile" method="POST">

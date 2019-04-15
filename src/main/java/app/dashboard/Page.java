@@ -67,4 +67,13 @@ public class Page implements Serializable {
         tileList.add(newTile);
     }
 
+    // Deletes the Tile object in tileList with id equal to the parameter int
+    // No change if no such tile exists
+    public void deleteTile(int id) {
+	for ( int i = 0; i < tileList.size(); i++ ) {
+	    if ( id == tileList.get(i).getId() ) // match
+		tileList.remove(i);
+	}
+    }
+
 }
