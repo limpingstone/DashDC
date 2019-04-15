@@ -19,6 +19,16 @@
         <input type="submit" name="submit">
     </form>
 
+    <!-- Deleting an existing page -->
+    <h2>Delete a page:</h2>
+    <form action="deletepage" method="POST">
+      <select name="id">
+	<option th:each="page : ${pageList}" th:value="${page.id}" th:text="${page.name}">
+	</option>
+      </select>
+      <input type="submit" name="submit">
+    </form>
+    
     <!-- Adding new pages -->
     <h2>Add a new page:</h2>
     <form action="newpage" method="POST">

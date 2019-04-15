@@ -44,4 +44,12 @@ public class Dashboard implements Serializable {
         pageList.add(newPage);
     }
 
+    // Removes a Page object from pageList with id matching the int parameter
+    // Does nothing if such a page does not exist
+    public void deletePage(int id) {
+	for (int i = 0; i < pageList.size(); i++) {
+	    if (id == pageList.get(i).getId()) // match
+		pageList.remove(i);
+	}
+    }
 }

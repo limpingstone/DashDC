@@ -85,7 +85,15 @@ public class CustomizeDashboardController {
         return "customizeTile";
     }
 
-
+    // Handles deleting a page inside the dashboard
+    // Serves up the customizeDashboard template
+    @RequestMapping("/customize/deletepage")
+    public RedirectView deletePage(@ModelAttribute FormCapture form) {
+	Application.dashboard.deletePage(form.getId()); // delete the page w/ this id
+	// go back to customize dashboard page
+	return new RedirectView("/customize/");
+    }
+    
     // Handles deleting a tile inside the page
     // Serves up the customizePage template
     @RequestMapping("/customize/page/deletetile")
