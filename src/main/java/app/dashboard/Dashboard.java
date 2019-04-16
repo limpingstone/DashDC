@@ -18,7 +18,7 @@ public class Dashboard implements Serializable {
     // Sets the first usable id index to 0
     public Dashboard() {
         pageList = new ArrayList<Page>();
-	idList = new boolean[Integer.MAX_VALUE / 10];
+	idList = new boolean[Integer.MAX_VALUE / 10]; // warning this may be too big for unit tests
 	idIndex = 0;
     }
 
@@ -33,6 +33,11 @@ public class Dashboard implements Serializable {
 	idIndex = i % idList.length;
 	
 	return i % idList.length; // return id value ready for use
+    }
+
+    // Marks the id passed in as a parameter as unused and free
+    public void freeId(int id) {
+	idList[id] = false;
     }
     
     // Returns a List of Page objects that this Dashboard contains

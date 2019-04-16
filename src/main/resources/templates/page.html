@@ -26,7 +26,7 @@
 
     <!-- Thymeleaf each for each tile -->
     <div th:each="tile : ${tileList}" style="border-style: solid">
-        <h2 th:text="${tile.getName()}"></h2>
+      <h2 th:text="${tile.getName()}"></h2> 
 
         <!-- Thymeleaf each to display each asset -->
         <div th:each="asset : ${tile.getAssets()}">
