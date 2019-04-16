@@ -38,7 +38,6 @@ public class CustomizeDashboardController {
     @RequestMapping("/customize/newpage")
     public RedirectView newPage(@ModelAttribute FormCapture form) {
 	Application.dashboard.addPage(getId(), form.getName()); // uses auto id system
-        //Application.dashboard.addPage(form.getId(), form.getName());
         return new RedirectView("/customize/");
     }
 
@@ -80,7 +79,6 @@ public class CustomizeDashboardController {
     @RequestMapping("/customize/page/newtile")
     public RedirectView newTile(@ModelAttribute FormCapture form) {
 	Application.currentPage.addTile(getId(), form.getName()); // uses auto id tracking
-        //Application.currentPage.addTile(form.getId(), form.getName());
 
         return new RedirectView("/customize/page/");
     }
@@ -147,7 +145,6 @@ public class CustomizeDashboardController {
         int[] position = new int[] { form.getXpos(), form.getYpos() };
 
 	Application.currentTile.addAssetImage(getId(), form.getName(), form.getLink(), size, position);
-        //Application.currentTile.addAssetImage(form.getId(), form.getName(), form.getLink(), size, position);
 
         return new RedirectView("/customize/page/tile/");
     }
@@ -158,7 +155,6 @@ public class CustomizeDashboardController {
     public RedirectView newList(@ModelAttribute FormCapture form) {
 	
 	Application.currentTile.addAssetList(getId(), form.getName(), form.getType());
-        //Application.currentTile.addAssetList(form.getId(), form.getName(), form.getType());
 
         return new RedirectView("/customize/page/tile/");
     }
@@ -168,7 +164,6 @@ public class CustomizeDashboardController {
     @RequestMapping("/customize/page/tile/newnote")
     public RedirectView newNote(@ModelAttribute FormCapture form) {
 	Application.currentTile.addAssetNote(getId(), form.getName());
-        //Application.currentTile.addAssetNote(form.getId(), form.getName());
 
         return new RedirectView("/customize/page/tile/");
     }
@@ -178,7 +173,6 @@ public class CustomizeDashboardController {
     @RequestMapping("/customize/page/tile/newlink")
     public RedirectView newLink(@ModelAttribute FormCapture form) {
 	Application.currentTile.addAssetLink(getId(), form.getName(), form.getLink());
-        //Application.currentTile.addAssetLink(form.getId(), form.getName(), form.getLink());
 
         return new RedirectView("/customize/page/tile/");
     }
