@@ -28,6 +28,19 @@ public class DashboardTest {
 		assertNull(dashboard.getDashboardPage(0));
 	}
 
+    @Test
+    public void testNextId() {
+	dashboard = new Dashboard();
+	assertEquals(0, dashboard.nextId());
+	assertEquals(1, dashboard.nextId());
+	assertEquals(2, dashboard.nextId());
+	for ( int i = 0; i < 100; i++ ) 
+	    dashboard.nextId();
+	assertEquals(103, dashboard.nextId());
+    }
+		     
+
+    
 	@Test
 	public void testAddPage() {
 		// Testing addPage() method

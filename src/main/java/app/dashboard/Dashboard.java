@@ -5,15 +5,36 @@ import java.util.ArrayList;
 import java.io.*;
 
 public class Dashboard implements Serializable {
+    // List of Page objects in this Dashboard
     private List<Page> pageList;
-
+    // An array of possible id values, indicating which one is used
+    private boolean[] idList;
+    private int idIndex; // last used id
+    
     // Constructor
     // Instantiates an instance of ArrayList
     // Sets the pageList field to the the empty ArrayList
+    // Instantiates idList to an array of all false
+    // Sets the first usable id index to 0
     public Dashboard() {
         pageList = new ArrayList<Page>();
+	idList = new boolean[Integer.MAX_VALUE / 10];
+	idIndex = 0;
     }
 
+    // Returns the next available id number to use
+    // Marks the id number as used
+    public int nextId() {
+	int i = idIndex;
+	while ( idList[i % idList.length] == true )
+	    i++;
+
+	idList[i % idList.length] = true; // mark new id as used
+	idIndex = i % idList.length;
+	
+	return i % idList.length; // return id value ready for use
+    }
+    
     // Returns a List of Page objects that this Dashboard contains
     public List<Page> getPages() {
         return pageList;

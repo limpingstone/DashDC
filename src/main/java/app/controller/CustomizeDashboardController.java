@@ -26,7 +26,7 @@ public class CustomizeDashboardController {
     // Points web browser to /customize
     @RequestMapping("/customize/newpage")
     public RedirectView newPage(@ModelAttribute FormCapture form) {
-
+	
         Application.dashboard.addPage(form.getId(), form.getName());
         return new RedirectView("/customize/");
     }
