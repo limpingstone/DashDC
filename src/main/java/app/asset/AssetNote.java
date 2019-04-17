@@ -30,7 +30,9 @@ public class AssetNote extends DashboardAsset implements Serializable{
     public String display(){
 	String retStr = "";
 	// Display title/name
-	retStr += "<b>" + getName() + "</b>";
+
+	retStr += "<h3>" + getName() + "</h3>";
+
 	// Display note contents
 	// Replace all \n with <br> to render newlines in HTML properly
 	retStr += "<p>" + noteText.replaceAll("\n", "<br>") + "</p>";
@@ -38,7 +40,7 @@ public class AssetNote extends DashboardAsset implements Serializable{
 	// option to edit note
 	retStr += "<form action='editnote' method='post'>";
 	retStr += "<input type='hidden' name='id' value='" + getId() + "'>";
-	retStr += "<input type='submit' name='submit' value='edit'><br>";
+	retStr += "<input type='submit' name='submit' value='Edit'><br>";
 	retStr += "</form>";
 	return retStr;
     }

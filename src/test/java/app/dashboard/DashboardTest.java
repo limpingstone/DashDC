@@ -37,10 +37,11 @@ public class DashboardTest {
 	for ( int i = 0; i < 100; i++ ) 
 	    dashboard.nextId();
 	assertEquals(103, dashboard.nextId());
+
     }
+
 		     
 
-    
 	@Test
 	public void testAddPage() {
 		// Testing addPage() method
@@ -79,7 +80,6 @@ public class DashboardTest {
 	dashboard.deletePage(2);
 	assertEquals(0, dashboard.getPages().size());
     }
-	
 
 	@Test
 	public void testGetPages() {
@@ -118,6 +118,7 @@ public class DashboardTest {
 		assertArrayEquals(names, dashboard.getPageNames().toArray());
 	}
 
+    
 	@Test
 	public void testGetDashboardPage() {
 		dashboard = new Dashboard();
@@ -136,5 +137,4 @@ public class DashboardTest {
 		assertEquals("second", dashboard.getDashboardPage(2).getName());
 		assertEquals("third", dashboard.getDashboardPage(3).getName());
 	}
-
 }

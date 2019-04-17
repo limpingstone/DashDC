@@ -3,3 +3,8 @@ build/
 .*.un~
 .vscode
 .settings
+
+src/main/save/dash_save.ser
+bin/src/main/save/dash_save.ser
+bin/
+

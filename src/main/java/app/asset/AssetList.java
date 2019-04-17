@@ -81,7 +81,9 @@ public class AssetList extends DashboardAsset implements Serializable {
 	// Returns the HTML string to display the list contents
 	@Override
 	public String display() {
-		String retStr = getName() + ":";
+
+		String retStr = "<h3>" + getName() + ": </h3>";
+
 		// determine bulleted or numbered list
 		if (type == 'u')
 			retStr += "<ul>";
@@ -99,7 +101,7 @@ public class AssetList extends DashboardAsset implements Serializable {
 		// option to edit list
 		retStr += "<form action='editlist' method='post'>";
 		retStr += "<input type='hidden' name='id' value='" + getId() + "'>";
-		retStr += "<input type='submit' name='submit' value='edit'><br>";
+		retStr += "<input type='submit' name='submit' value='Edit'><br>";
 		retStr += "</form>";
 
 		return retStr;
