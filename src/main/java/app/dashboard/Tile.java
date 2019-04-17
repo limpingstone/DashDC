@@ -2,6 +2,7 @@ package app.dashboard;
 
 import java.util.List;
 import java.util.ArrayList;
+
 import java.io.*;
 
 import app.asset.*;
@@ -91,6 +92,12 @@ public class Tile implements Serializable {
     // Creates a new AssetLink object
     // Adds the AssetLink to assetList
     public void addAssetLink(int id, String name, String path) {
+	// Ensures that the link starts with https:// or http://
+	if ( !path.toLowerCase().startsWith("https://") &&
+	     !path.toLowerCase().startsWith("http://") ) {
+	    path = "http://".concat(path); // add http:// to front of link
+	}
+	    
 	AssetLink link = new AssetLink(id, name, path);
 	assetList.add((DashboardAsset) link);
     }

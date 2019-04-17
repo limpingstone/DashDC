@@ -142,6 +142,20 @@ public class TileTest {
 	tile.addAssetLink(2, "link2", "path2");
 	tile.addAssetLink(3, "link3", "path3");
 	assertArrayEquals(new String[] {"link1", "link2", "link3"}, tile.getAssetNames().toArray());
+
+	// test that the link is formatted correctly
+	tile = null;
+	tile = new Tile();
+	tile.addAssetLink(1, "link1", "www.google.com");
+	tile.addAssetLink(2, "link2", "bing.com");
+	tile.addAssetLink(3, "link3", "https://case.edu");
+	tile.addAssetLink(4, "link4", "hTTp://gmail.com");
+
+	assertEquals("http://www.google.com", ((AssetLink)tile.getAsset(1)).getLink());
+	assertEquals("http://bing.com", ((AssetLink)tile.getAsset(2)).getLink());
+	assertEquals("https://case.edu", ((AssetLink)tile.getAsset(3)).getLink());
+	assertEquals("hTTp://gmail.com", ((AssetLink)tile.getAsset(4)).getLink());
+				
     }
 
 
