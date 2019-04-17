@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Customize Dashboard</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>Customize User Dashboard</h1>
+
+    <!-- Selecting the page to be edited -->
+    <h2>Here are the pages that currently exist:</h2>
+    <p>Select which page to edit:</p>
+    <form action="selectpage" method="POST">
+        <select name="id">
+            <option th:each="page : ${pageList}" th:value="${page.id}" th:text="${page.name}">
+            </option>
+        </select>
+	<!-- if there are no pages to choose from, just disable the submit button -->
+        <input th:if="${pageList.isEmpty()}" type="submit" name="submit" disabled>
+	<input th:unless="${pageList.isEmpty()}" type="submit" name="submit">
+    </form>
+
+    <!-- Adding new pages -->
+    <h2>Add a new page:</h2>
+    <form action="newpage" method="POST">
+        <p>Name:</p><input type="text" name="name" required>
+        <p></p><input type="submit" name="submit">
+    </form>
+
+    <!-- Deleting an existing page -->
+    <h2>Delete a page:</h2>
+    <p>Select which page to delete</p>
+    <form action="deletepage" method="POST">
+        <select name="id">
+            <option th:each="page : ${pageList}" th:value="${page.id}" th:text="${page.name}">
+            </option>
+        </select>
+	<!-- if there are no pages to choose from, just disable the submit button -->
+        <input th:if="${pageList.isEmpty()}" type="submit" name="submit" disabled>
+	<input th:unless="${pageList.isEmpty()}" type="submit" name="submit">
+    </form>
+
+    <!-- Saving the dashboard -->
+    <h2>Save the dashboard:</h2>
+    <form action="save" method="POST">
+        <input type="submit" name="Save Dashboard" value="Save the dashboard!">
+    </form>
+</body>
+
+</html>

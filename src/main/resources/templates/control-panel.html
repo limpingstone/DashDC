@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<!-- Control Panel is deprecated, it has been moved to a javafx app -->
+<body>
+   <h1>Control Panel:</h1>
+   <h2 th:text="'User Mode: ' + ${mode}"></h2>
+   <form action="#" data-th-action="@{/action/edit}" data-th-object="${model}" method="post">
+      <button type="submit" name="action" value="basic">Basic</button>
+      <button type="submit" name="action" value="advanced">Advanced</button>
+   </form>
+   <h2>Autostart</h2>
+   <h2>Go to...</h2>
+   <h2>Export Dashboard</h2>
+   <h2>Import Dashboard</h2>
+   <h2>Uninstall the Dashboard</h2>
+</body>
+
+</html>

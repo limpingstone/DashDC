@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Customize Tile</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>Customize User Dashboard</h1>
+
+    <!-- Preview of the tile being edited -->
+    <h2>Current Preview of the tile:</h2>
+     
+    <hr>
+    
+    <div th:each="asset : ${assetList}" class="asset">
+        <div th:remove="tag" th:utext="${asset.display()}"></div>
+    </div>
+
+    <hr>
+
+    <!-- Adding new assets -->
+    <h2>Add a new asset:</h2>
+    <p>Select which type of asset to add</p>
+    <form action="newasset" method="POST">
+        <select name="type">
+            <option th:each="assetType : ${assetTypes}" th:value="${assetType}" th:text="${assetType}"></option>
+        </select>
+        <input type="submit" name="submit">
+    </form>
+
+    <!-- Selecting the asset to be edited -->
+    <h2>Delete an Asset:</h2>
+    <p>Select which asset to delete:</p>
+    <form action="deleteasset" method="POST">
+        <select name="id">
+            <option th:each="asset : ${assetList}" th:value="${asset.id}" th:text="${asset.name}">
+            </option>
+        </select>
+	<!-- if there are not assetss to choose from, just disable the submit button -->
+        <input th:if="${assetList.isEmpty()}" type="submit" name="submit" disabled>
+	<input th:unless="${assetList.isEmpty()}" type="submit" name="submit">        
+    </form>
+
+    <!-- Saving the dashboard -->
+    <h2>Save the dashboard:</h2>
+    <form action="save" method="POST">
+        <input type="submit" name="Save Dashboard" value="Save the dashboard!">
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Customize Page</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>Customize User Dashboard</h1>
+
+    <!-- Preview of the page being edited -->
+    <h2>Current Preview of the page:</h2>
+
+    <hr>
+
+    <h1 th:text="${currentPage.name}"></h1>
+    <div class="tileWrapper">
+        <div th:each="tile : ${tileList}" class="tile">
+            <h2 th:text="${tile.getName()}"></h2>
+            <div th:each="asset : ${tile.getAssets()}" class="asset">
+                <div th:remove="tag" th:utext="${asset.display()}"></div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Selecting the tile to be edited -->
+    <h2>Here are the tiles that currently exist:</h2>
+    <p>Select which tile to edit:</p>
+    <form action="selecttile" method="POST">
+        <select name="id">
+            <option th:each="tile : ${tileList}" th:value="${tile.id}" th:text="${tile.name}">
+            </option>
+        </select>
+	<!-- if there are not tiles to choose from, just disable the submit button -->
+        <input th:if="${tileList.isEmpty()}" type="submit" name="submit" disabled>
+	<input th:unless="${tileList.isEmpty()}" type="submit" name="submit">
+    </form>
+
+    <!-- Adding new tiles -->
+    <h2>Add a new tile:</h2>
+    <form action="newtile" method="POST">
+        <p>Name:</p><input type="text" name="name" required>
+        <p></p><input type="submit" name="submit">
+    </form>
+
+    <!-- Deleting existing tiles -->
+    <h2>Delete a tile:</h2>
+    <p>Select which tile to delete:</p>
+    <form action="deletetile" method="POST">
+        <select name="id">
+            <option th:each="tile : ${tileList}" th:value="${tile.id}" th:text="${tile.name}">
+            </option>
+        </select>
+	<!-- if there are not tiles to choose from, just disable the submit button -->
+        <input th:if="${tileList.isEmpty()}" type="submit" name="submit" disabled>
+	<input th:unless="${tileList.isEmpty()}" type="submit" name="submit">
+    </form>
+
+    <!-- Saving the dashboard -->
+    <h2>Save the dashboard:</h2>
+    <form action="save" method="POST">
+        <input type="submit" name="Save Dashboard" value="Save the dashboard!">
+    </form>
+</body>
+
+</html>

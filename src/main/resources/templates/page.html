@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Dashboard</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+
+<body th:if="${currentPage != null}">
+    <!-- form to choose which page to view -->
+    <form action="/changeDashboard" method="POST">
+        <select name="id">
+            <option th:each="page : ${pageList}" th:value="${page.id}" th:text="${page.name}">
+            </option>
+        </select>
+        <input type="submit" name="submit">
+    </form>
+
+    <!-- Prototyping button select for pages -->
+    <!--
+    <form th:each="page : ${pageList}" action="/" method="POST" th:id="${page.id}">
+        <input type = "submit" th:form="${page.id}" th:name="${page.id}" th:value="${page.name}">
+    </form>
+    -->
+
+    <!-- Creates the name of the page -->
+    <h1 th:text="${currentPage.name}"></h1>
+
+    <!-- Thymeleaf each for each tile -->
+    <div class="tileWrapper">
+        <div th:each="tile : ${tileList}" class="tile">
+            <h2 th:text="${tile.getName()}"></h2>
+
+            <!-- Thymeleaf each to display each asset -->
+            <div th:each="asset : ${tile.getAssets()}" class="asset">
+                <div th:remove="tag" th:utext="${asset.display()}"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<!-- The dashboard is empty. No pages yet. -->
+
+<body th:unless="${currentPage != null}">
+    <h1> Welcome! </h1>
+    <p> Looks like you don't have any pages yet. Launch our customization tool to start building one! </p>
+</body>
+
+</html>
