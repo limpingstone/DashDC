@@ -18,7 +18,7 @@ public class Dashboard implements Serializable {
     // Sets the first usable id index to 0
     public Dashboard() {
         pageList = new ArrayList<Page>();
-	idList = new boolean[Integer.MAX_VALUE / 10]; // warning this may be too big for unit tests
+	idList = new boolean[Integer.MAX_VALUE / 2000]; // warning this may be too big for unit tests
 	idIndex = 0;
     }
 
