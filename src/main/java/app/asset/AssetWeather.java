@@ -97,14 +97,28 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 		return response.toString();
 	}
 
+    // Pulls new weather data from API
+    public void refresh() {
+	try {
+	    setApiContent(requestApiContent(location, key));
+	}
+	catch (Exception e) {
+	    System.out.println("Error requesting weather information from API");
+	}
+    }
+    
 	// Returns a String of the HTML code to display the weather asset
     @Override
     public String display() {
+	refresh(); // update weather info
         String retStr = "<br>";
-		// specify the weather text
-		retStr += getApiContent();
-		retStr += "<br>";
-
-		return retStr;
+	// specify the weather text
+	retStr += getApiContent();
+	retStr += "<br>";
+	retStr += "<form action='refresh' method='post'>";
+	retStr += "<input type='submit' name='submit' value='Refresh'> <br>";
+	retStr += "</form>";
+	
+	return retStr;
     }
 }

@@ -177,4 +177,12 @@ public class CustomizeDashboardController {
         return new RedirectView("/customize/page/tile/");
     }
 
+    // Handles making the new weather asset
+    // Points web browser to /customize/page/tile
+    @RequestMapping("/customize/page/tile/newweather")
+    public RedirectView newWeather(@ModelAttribute FormCapture form) {
+	Application.currentTile.addAssetWeather(getId(), form.getName(), form.getText(), form.getLink());
+	return new RedirectView("/customize/page/tile/");
+    }
+
 }

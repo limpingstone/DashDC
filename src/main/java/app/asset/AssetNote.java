@@ -35,7 +35,7 @@ public class AssetNote extends DashboardAsset implements Serializable{
 
 	// Display note contents
 	// Replace all \n with <br> to render newlines in HTML properly
-	retStr += "<p>" + noteText.replaceAll("\n", "<br>") + "</p>";
+	retStr += "<p class='noteasset'>" + noteText.replaceAll("\n", "<br>") + "</p>";
 
 	// option to edit note
 	retStr += "<form action='editnote' method='post'>";

@@ -53,6 +53,17 @@
                 <input type='submit' name='submit'>
             </form>
         </div>
+
+	<!-- Create a weather asset type -->
+	<div th:case="'weather'">
+	  <form action='newweather' method='post'>
+	    Name: <input type='txt' name='name' required> <br>
+	    City name: <input type='txt' name='text' required> <br>
+	    API key: TEMPORARY <input type='txt' name='link' required><br>
+	    <input type='submit' name='submit'>
+	  </form>
+	</div>
+	
     </th:block>
 </body>
 

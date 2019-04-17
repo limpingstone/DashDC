@@ -54,4 +54,11 @@ public class DashboardController {
             return new RedirectView("/");
       }
 
+    // Request handler for refreshing the dashboard page
+    // Points we browser to / root
+    @RequestMapping("/refresh")
+    public RedirectView refresh(@ModelAttribute FormCapture form) {
+	return new RedirectView("/");
+    }
+
 }

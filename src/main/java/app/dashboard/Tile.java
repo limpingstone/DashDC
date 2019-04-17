@@ -123,7 +123,16 @@ public class Tile implements Serializable {
 	AssetNote note = new AssetNote(id, name);
 	assetList.add((DashboardAsset) note);
     }
-    
+
+    // Creates a new AssetWeather objects
+    // Adds the AssetWeather to assetList
+    public void addAssetWeather(int id, String name, String city, String key) {
+	AssetWeather weather = new AssetWeather(id, name, city, key);
+	assetList.add((DashboardAsset) weather);
+
+    }
+
+    // NOTE: This is actually never called by the program.
     public String display() {
         // return assetList.toString();
 
