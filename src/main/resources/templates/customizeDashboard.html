@@ -16,7 +16,9 @@
             <option th:each="page : ${pageList}" th:value="${page.id}" th:text="${page.name}">
             </option>
         </select>
-        <input type="submit" name="submit">
+	<!-- if there are no pages to choose from, just disable the submit button -->
+        <input th:if="${pageList.isEmpty()}" type="submit" name="submit" disabled>
+	<input th:unless="${pageList.isEmpty()}" type="submit" name="submit">
     </form>
 
     <!-- Adding new pages -->
@@ -34,7 +36,9 @@
             <option th:each="page : ${pageList}" th:value="${page.id}" th:text="${page.name}">
             </option>
         </select>
-        <input type="submit" name="submit">
+	<!-- if there are no pages to choose from, just disable the submit button -->
+        <input th:if="${pageList.isEmpty()}" type="submit" name="submit" disabled>
+	<input th:unless="${pageList.isEmpty()}" type="submit" name="submit">
     </form>
 
     <!-- Saving the dashboard -->

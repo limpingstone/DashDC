@@ -25,7 +25,9 @@
             <option th:each="tile : ${tileList}" th:value="${tile.id}" th:text="${tile.name}">
             </option>
         </select>
-        <input type="submit" name="submit">
+	<!-- if there are not tiles to choose from, just disable the submit button -->
+        <input th:if="${tileList.isEmpty()}" type="submit" name="submit" disabled>
+	<input th:unless="${tileList.isEmpty()}" type="submit" name="submit">
     </form>
 
     <!-- Adding new tiles -->
@@ -43,7 +45,9 @@
             <option th:each="tile : ${tileList}" th:value="${tile.id}" th:text="${tile.name}">
             </option>
         </select>
-        <input type="submit" name="submit">
+	<!-- if there are not tiles to choose from, just disable the submit button -->
+        <input th:if="${tileList.isEmpty()}" type="submit" name="submit" disabled>
+	<input th:unless="${tileList.isEmpty()}" type="submit" name="submit">
     </form>
 
     <!-- Saving the dashboard -->
