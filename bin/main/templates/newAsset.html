@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Editing page: </title>
+    <title>Editing page:</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 
 <body>
@@ -16,11 +17,10 @@
         <!-- Create an image asset type -->
         <div th:case="'image'">
             <form action='newimage' method='post'>
-                Name: <input type='text' name='name'>
-                ID: <input type='number' name='id'>
-                Link to image: <input type='text' name='link'>
-                Size x: <input type='number' name='xsize'>
-                y: <input type='number' name='ysize'>
+                Name: <input type='text' name='name' required> <br>
+                Link to image: <input type='text' name='link' required> <br>
+                Size x: <input type='number' name='xsize' required>
+                y: <input type='number' name='ysize' required> <br>
                 Position x: <input type='number' name='xpos'> y: <input type='number' name='ypos'>
                 <input type='submit' name='submit'>
             </form>
@@ -29,18 +29,18 @@
         <!-- Create an list asset type -->
         <div th:case="'list'">
             <form action='newlist' method='post'>
-                List Title: <input type='txt' name='name'>
-                ID: <input type='number' name='id'>
-                List Type: <input type='radio' name='type' value='unordered'>
-                unordered <input type='radio' name='type' value='ordered'> ordered <input type='submit' name='submit'>
+                List Title: <input type='txt' name='name' required> <br>
+                List Type:
+		<input type='radio' name='type' value='unordered' checked> unordered <!-- default checked -->
+		<input type='radio' name='type' value='ordered'> ordered <br>
+		<input type='submit' name='submit'>
             </form>
         </div>
 
         <!-- Create a note asset type -->
         <div th:case="'note'">
             <form action='newnote' method='post'>
-                Note Title: <input type='txt' name='name'>
-                ID: <input type='number' name='id'>
+                Note Title: <input type='txt' name='name' required> <br>
                 <input type='submit' name='submit'>
             </form>
         </div>
@@ -48,12 +48,22 @@
         <!-- Create a link asset type -->
         <div th:case="'link'">
             <form action='newlink' method='post'>
-                Name: <input type='text' name='name'>
-                ID: <input type='number' name='id'>
-                Link to webpage: <input type='text' name='link'>
+                Name: <input type='text' name='name' required> <br>
+                Link to webpage: <input type='text' name='link' required> <br>
                 <input type='submit' name='submit'>
             </form>
         </div>
+
+	<!-- Create a weather asset type -->
+	<div th:case="'weather'">
+	  <form action='newweather' method='post'>
+	    Name: <input type='txt' name='name' required> <br>
+	    City name: <input type='txt' name='text' required> <br>
+	    API key: TEMPORARY <input type='txt' name='link' required><br>
+	    <input type='submit' name='submit'>
+	  </form>
+	</div>
+	
     </th:block>
 </body>
 

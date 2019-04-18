@@ -2,6 +2,7 @@
 
 <head>
     <title>Customize Tile</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 
 <body>
@@ -9,9 +10,13 @@
 
     <!-- Preview of the tile being edited -->
     <h2>Current Preview of the tile:</h2>
-    <div th:each="asset : ${assetList}">
+    <hr>
+    
+    <div th:each="asset : ${assetList}" class="asset">
         <div th:remove="tag" th:utext="${asset.display()}"></div>
     </div>
+
+    <hr>
 
     <!-- Adding new assets -->
     <h2>Add a new asset:</h2>
@@ -31,7 +36,9 @@
             <option th:each="asset : ${assetList}" th:value="${asset.id}" th:text="${asset.name}">
             </option>
         </select>
-        <input type="submit" name="submit">
+	<!-- if there are not assetss to choose from, just disable the submit button -->
+        <input th:if="${assetList.isEmpty()}" type="submit" name="submit" disabled>
+	<input th:unless="${assetList.isEmpty()}" type="submit" name="submit">        
     </form>
 
     <!-- Saving the dashboard -->

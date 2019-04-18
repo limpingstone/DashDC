@@ -2,6 +2,8 @@
 
 <head>
     <title>Dashboard</title>
+
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 
 <body th:if="${currentPage != null}">
@@ -20,25 +22,30 @@
         <input type = "submit" th:form="${page.id}" th:name="${page.id}" th:value="${page.name}">
     </form>
     -->
-    
+
     <!-- Creates the name of the page -->
     <h1 th:text="${currentPage.name}"></h1>
 
     <!-- Thymeleaf each for each tile -->
-    <div th:each="tile : ${tileList}" style="border-style: solid">
-        <h2 th:text="${tile.getName()}"></h2>
+    <div class="tileWrapper">
+        <div th:each="tile : ${tileList}" class="tile">
+            <h2 th:text="${tile.getName()}"></h2>
 
-        <!-- Thymeleaf each to display each asset -->
-        <div th:each="asset : ${tile.getAssets()}">
-            <div th:remove="tag" th:utext="${asset.display()}"></div>
+            <!-- Thymeleaf each to display each asset -->
+            <div th:each="asset : ${tile.getAssets()}" class="asset">
+                <div th:remove="tag" th:utext="${asset.display()}"></div>
+            </div>
         </div>
     </div>
+
 </body>
 
 <!-- The dashboard is empty. No pages yet. -->
+
 <body th:unless="${currentPage != null}">
-  <h1> Welcome! </h1>
-  <p> Looks like you don't have any pages yet. Launch our customization tool to start building one! </p>
+    <h1> Welcome! </h1>
+    <p> Looks like you don't have any pages yet. Launch our customization tool to start building one! </p>
 </body>
 
 </html>
+

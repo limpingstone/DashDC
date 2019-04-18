@@ -165,7 +165,7 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 		retStr += "Temperature (K): " + getTemperature() + "<br><br>";
 		retStr += "State: " + getState() + "<br>";
 		retStr += "<br>";
-		retStr += "<form action='refresh' method='post'>";
+		retStr += "<form action='refreshWeather' method='post'>";
 		retStr += "<input type='submit' name='submit' value='Refresh'> <br>";
 		retStr += "</form>";
 
