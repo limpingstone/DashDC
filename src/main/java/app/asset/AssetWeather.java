@@ -1,11 +1,15 @@
 package app.asset;
 
+import org.json.JSONObject; 
+
 import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import javax.net.ssl.HttpsURLConnection;
 
 public class AssetWeather extends DashboardAsset implements Serializable {
@@ -19,11 +23,14 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 	// String to hold retrieved API content
 	private String apiContent;
 
-	// String to determine the weather status 
-	private String weather; 
+	// String indicating temperature in Celcius
+	private String temperature; 
 
-	// String to indicate temperature in Celcius
-	private int temperature; 
+	// String to determine the weather state 
+	private String state; 
+
+	// String indicating humidity level
+	private String humidity;
 
 	// Constructor takes parameters id, name, location and key for the asset
     // Calls the parent constructor on id and name
@@ -34,11 +41,11 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 		this.key = key;
 		try {
 			this.apiContent = requestApiContent(location, key);
+			parseApiContent(this.getApiContent());
 		}
 		catch (Exception e) {
-			System.out.println("Error requesting weather information from API");
+			System.out.println("Error parsing weather information from API");
 		}
-		
 	}
 
 	// Sets the location variable of the asset 
@@ -71,6 +78,45 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 		return apiContent;
 	}
 
+	// Sets the temperature
+	public void setTemperature(String temperature) {
+		this.temperature = temperature;
+	}
+
+	// Returns the value of temperature
+	public String getTemperature() {
+		return temperature;
+	}
+
+	// Sets the value of the weather state
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	// Returns the value of the weather state
+	public String getState() {
+		return state;
+	}
+
+	// Sets the value of humidity
+	public void setHumidity(String humidity) {
+		this.humidity = humidity;
+	} 
+
+	// Returns the value of humidity
+	public String getHumidity() {
+		return humidity;
+	}
+
+	// Parse the JSONObject using the string retrieved from the API and set the variables accordingly
+	public void parseApiContent(String apiContent) throws IOException {
+		System.out.println("\n" + getApiContent());
+		JSONObject jsonObj = new JSONObject(getApiContent());
+
+		setTemperature(jsonObj.getJSONObject("main").get("temp").toString());
+		setHumidity(jsonObj.getJSONObject("main").get("humidity").toString());
+		setState(jsonObj.getJSONArray("weather").getJSONObject(0).get("main").toString());
+	}
 
 	// Uses the OpenWeatherMap API to retrieve weather information
 	// Returns string containing key value pairs
@@ -99,26 +145,30 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 
     // Pulls new weather data from API
     public void refresh() {
-	try {
-	    setApiContent(requestApiContent(location, key));
-	}
-	catch (Exception e) {
-	    System.out.println("Error requesting weather information from API");
-	}
+		try {
+		    setApiContent(requestApiContent(location, key));
+		    parseApiContent(this.getApiContent());
+		}
+		catch (Exception e) {
+		    System.out.println("Error parsing weather information from API");
+		}
     }
     
 	// Returns a String of the HTML code to display the weather asset
     @Override
     public String display() {
-	refresh(); // update weather info
-        String retStr = "<br>";
-	// specify the weather text
-	retStr += getApiContent();
-	retStr += "<br>";
-	retStr += "<form action='refresh' method='post'>";
-	retStr += "<input type='submit' name='submit' value='Refresh'> <br>";
-	retStr += "</form>";
-	
-	return retStr;
+		refresh(); // update weather info
+		    String retStr = "";
+		// specify the weather text
+		retStr += "Location: " +  getLocation() + "<br><br>";
+		retStr += "Humidity: " +  getHumidity() + "% <br>";
+		retStr += "Temperature (K): " + getTemperature() + "<br><br>";
+		retStr += "State: " + getState() + "<br>";
+		retStr += "<br>";
+		retStr += "<form action='refresh' method='post'>";
+		retStr += "<input type='submit' name='submit' value='Refresh'> <br>";
+		retStr += "</form>";
+
+		return retStr;
     }
 }
