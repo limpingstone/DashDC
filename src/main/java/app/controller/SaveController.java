@@ -24,8 +24,8 @@ public class SaveController {
     @RequestMapping("**/save")
     public String saveController(Model model, @ModelAttribute FormCapture form) {
         // Call the bytecode to save the method.
-        ByteCode.generateSaveFile(Application.dashboard, "src/main/save/dash_save.ser");
-
+        //ByteCode.generateSaveFile(Application.dashboard, "src/main/save/dash_save.ser");
+        ByteCode.generateSaveFile(Application.dashboard, "dash_save.ser");
         return "saveDashboard";
     }
 

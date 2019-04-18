@@ -29,7 +29,8 @@ public class Application {
 		Console.open();
 
 		// check if save file exists
-		File save = new File("src/main/save/dash_save.ser");
+		//File save = new File("src/main/save/dash_save.ser");
+		File save = new File("dash_save.ser");
 
 		if (save.exists())
 			Application.dashboard = load();
@@ -39,7 +40,8 @@ public class Application {
 
 	// returns a dashboard object from save file
 	public static Dashboard load() {
-		Dashboard d = (Dashboard) ByteCode.loadFromSaveFile("src/main/save/dash_save.ser");
+		//Dashboard d = (Dashboard) ByteCode.loadFromSaveFile("src/main/save/dash_save.ser");
+		Dashboard d = (Dashboard) ByteCode.loadFromSaveFile("dash_save.ser");
 		return d;
 	}
 
