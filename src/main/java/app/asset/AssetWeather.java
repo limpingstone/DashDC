@@ -17,6 +17,9 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 	// String to hold weather location
 	private String location;
 
+	// String to hold country information
+	private String country;
+
 	// String to hold API key
 	private String key;
 
@@ -56,6 +59,16 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 	// Returns the location variable of the asset 
 	public String getLocation() {
 		return location;
+	}
+
+	// Sets the country variable of the asset
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	// Returns the country variable of the asset 
+	public String getCountry() {
+		return country;
 	}
 
 	// Sets the key variable of the asset 
@@ -108,16 +121,6 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 		return humidity;
 	}
 
-	// Parse the JSONObject using the string retrieved from the API and set the variables accordingly
-	public void parseApiContent(String apiContent) throws IOException {
-		System.out.println("\n" + getApiContent());
-		JSONObject jsonObj = new JSONObject(getApiContent());
-
-		setTemperature(jsonObj.getJSONObject("main").get("temp").toString());
-		setHumidity(jsonObj.getJSONObject("main").get("humidity").toString());
-		setState(jsonObj.getJSONArray("weather").getJSONObject(0).get("main").toString());
-	}
-
 	// Uses the OpenWeatherMap API to retrieve weather information
 	// Returns string containing key value pairs
 	public static String requestApiContent(String location, String key) throws Exception {
@@ -143,6 +146,67 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 		return response.toString();
 	}
 
+	// Parse the JSONObject using the string retrieved from the API and set the variables accordingly
+	public void parseApiContent(String apiContent) throws IOException {
+		System.out.println("\n" + getApiContent());
+		JSONObject jsonObj = new JSONObject(getApiContent());
+
+		setCountry(jsonObj.getJSONObject("sys").get("country").toString());
+		setTemperature(jsonObj.getJSONObject("main").get("temp").toString());
+		setHumidity(jsonObj.getJSONObject("main").get("humidity").toString());
+		setState(jsonObj.getJSONArray("weather").getJSONObject(0).get("main").toString());
+	}
+
+	// Convert the temperature into Celcius, Fahrenheit, or Kelvin
+    public String convertTemp(char unit) {
+    	String displayTemp = temperature;
+    	switch (unit) {
+    		case 'F':
+    			displayTemp = Math.round(1 + Double.parseDouble(temperature) * 1.8 - 459.67) + " °F";
+    			break; 
+    		case 'C':
+    			displayTemp = Math.round(1 + Double.parseDouble(temperature) - 273.15) + " °C";
+    			break;
+    		default:
+    			displayTemp += "K";
+    	}
+    	return displayTemp;
+    }
+
+    // Weather condition icons are parsed 
+    // Source of weather types: https://openweathermap.org/weather-conditions
+    public String parseWeatherIcon() {
+    	String imgHtml = "<img src=\""; 
+
+    	// Source: https://cdn4.iconfinder.com/data/icons/programming-line-style/32/Cloud-512.png
+    	if (getState().equals("Clouds"))
+    		imgHtml += "/images/cloud.png";
+    	// https://cdn4.iconfinder.com/data/icons/spring-theme-line/32/sun--512.png
+    	else if (getState().equals("Clear"))
+    		imgHtml += "/images/clear.png";
+    	// Source: https://cdn3.iconfinder.com/data/icons/weather-3-4/128/Cloudy-Moderate-Rain-Chill-Cold-Raining-512.png
+    	else if (getState().equals("Rain") || getState().equals("Drizzle"))
+    		imgHtml += "/images/rain.png";
+    	// Source: https://cdn0.iconfinder.com/data/icons/cloud-data-technology-1/24/18-512.png
+    	else if (getState().equals("Thunderstorm"))
+    		imgHtml += "/images/thunderstorm.png";
+    	// Source: https://cdn4.iconfinder.com/data/icons/weather-line-7/100/13-512.png
+    	else if (getState().equals("Mist") || getState().equals("Fog") || getState().equals("Haze"))
+    		imgHtml += "/images/mist.png";
+    	// Source: https://cdn4.iconfinder.com/data/icons/vectory-weather-1/40/snowflake-512.png
+    	else if (getState().equals("Snow"))
+    		imgHtml += "/images/snow.png";
+    	// Source: https://cdn0.iconfinder.com/data/icons/general-15/64/tornado-512.png
+    	else if (getState().equals("Tornado"))
+    		imgHtml += "/images/tornado.png";
+    	// Source: https://www.shareicon.net/download/2016/07/18/797799_sun_512x512.png
+    	else 
+    		imgHtml += "/images/bad-weather.png";
+
+    	imgHtml += "\" width=\"80px\" />";
+    	return imgHtml;
+    }
+
     // Pulls new weather data from API
     public void refresh() {
 		try {
@@ -153,17 +217,17 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 		    System.out.println("Error parsing weather information from API");
 		}
     }
-    
+
 	// Returns a String of the HTML code to display the weather asset
     @Override
     public String display() {
 		refresh(); // update weather info
 		    String retStr = "";
 		// specify the weather text
-		retStr += "Location: " +  getLocation() + "<br><br>";
-		retStr += "Humidity: " +  getHumidity() + "% <br>";
-		retStr += "Temperature (K): " + getTemperature() + "<br><br>";
-		retStr += "State: " + getState() + "<br>";
+		retStr += "<strong>" + getLocation() + ", " + getCountry() + "</strong><br><br>";
+		retStr += "<strong>Humidity: </strong>" +  getHumidity() + "% <br>";
+		retStr += "<strong>Temperature: </strong>" + convertTemp('F') + "<br><br>";
+		retStr += parseWeatherIcon() + "<br>";
 		retStr += "<br>";
 		retStr += "<form action='refreshWeather' method='post'>";
 		retStr += "<input type='submit' name='submit' value='Refresh'> <br>";
