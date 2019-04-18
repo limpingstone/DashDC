@@ -50,6 +50,9 @@ input[type="submit"]:active:enabled{
     background-color: #F9F9F9;
     border-radius: 10px;
     padding: 20px;
+    max-height: 500px;
+    overflow: scroll;
+
 }
 
 .asset{
