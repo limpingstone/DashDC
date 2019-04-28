@@ -222,7 +222,9 @@ public class AssetWeather extends DashboardAsset implements Serializable {
     @Override
     public String display() {
 		refresh(); // update weather info
-		    String retStr = "";
+			String retStr = "";
+			
+		
 		// specify the weather text
 		retStr += "<strong>" + getLocation() + ", " + getCountry() + "</strong><br><br>";
 		retStr += "<strong>Humidity: </strong>" +  getHumidity() + "% <br>";
@@ -232,7 +234,7 @@ public class AssetWeather extends DashboardAsset implements Serializable {
 		retStr += "<form action='refreshWeather' method='post'>";
 		retStr += "<input type='submit' name='submit' value='Refresh'> <br>";
 		retStr += "</form>";
-
+		
 		return retStr;
     }
 }
