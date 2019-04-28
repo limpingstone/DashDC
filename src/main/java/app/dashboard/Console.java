@@ -11,7 +11,7 @@ import app.ByteCode;
 
 public class Console {
 
-    private static JFrame consoleFrame; 
+    private static JFrame consoleFrame;
 
     /** The method that launches the console GUI */
     public static void open() {
@@ -23,34 +23,57 @@ public class Console {
 
         /* Initializing a panel with horizontal layout for the buttons */
         JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // Button to launch dashboard in the browser
         JButton launchDashboardButton = new JButton("Launch Dashboard");
+        launchDashboardButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        launchDashboardButton.setEnabled(false);
         launchDashboardButton.addActionListener(e -> {
             Console.launchDashboard();
         });
 
         // Button to launch customization tool in the browser
         JButton launchCustomizeButton = new JButton("Customization Tool");
+        launchCustomizeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        launchCustomizeButton.setEnabled(false);
         launchCustomizeButton.addActionListener(e -> {
             Console.launchCustomizationTool();
         });
 
         // Button to end the program
         JButton killJarButton = new JButton("Exit");
+        killJarButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         killJarButton.addActionListener(e -> {
             Console.exit();
         });
 
+        // Label showing status of initializing the program
+        JLabel status = new JLabel("Loading Modules...");
+        status.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         /* Add the buttons to the panel in order */
+        panel.add(status);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(launchDashboardButton);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(launchCustomizeButton);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(killJarButton);
 
         /* Add the panel to the frame and display the frame */
         consoleFrame.getContentPane().add(panel);
         consoleFrame.setVisible(true);
+
+        /* Enabling the buttons after waiting for Spring boot to launch in the background */
+        try {
+            Thread.sleep(5000);
+            launchDashboardButton.setEnabled(true);
+            launchCustomizeButton.setEnabled(true);
+            status.setText("Welcome to Dash DC!");
+        } catch (InterruptedException e) {
+            System.out.print("Error launching Dashboard functionalities");
+        }
     }
 
     // STUB
@@ -58,8 +81,8 @@ public class Console {
 
     }
 
-    /** 
-     * The method that launches the dashboard in the system's default browser 
+    /**
+     * The method that launches the dashboard in the system's default browser
      * Source:
      * https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
      */
@@ -75,8 +98,8 @@ public class Console {
         }
     }
 
-    /** 
-     * The method that launches the customization tool page in the system's default browser 
+    /**
+     * The method that launches the customization tool page in the system's default browser
      * Source:
      * https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
      */
