@@ -149,6 +149,18 @@ public class CustomizeDashboardController {
         return new RedirectView("/customize/page/tile/");
     }
 
+    // Handles making the new youtube embed
+    // Points web browser to /customize/page/tile
+    @RequestMapping("/customize/page/tile/newyoutube")
+    public RedirectView newYoutube(@ModelAttribute FormCapture form) {
+	int[] size = new int[] { form.getXsize(), form.getYsize() };
+	int[] position = new int[2];
+
+	Application.currentTile.addAssetYoutube(getId(), form.getName(), form.getLink(), size, position);
+	return new RedirectView("/customize/page/tile/");
+    }
+
+    
     // Handles making the new list
     // Points web browser to /customize/page/tile
     @RequestMapping("/customize/page/tile/newlist")
