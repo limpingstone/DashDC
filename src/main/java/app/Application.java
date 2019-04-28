@@ -46,9 +46,7 @@ public class Application {
 
 	// returns a dashboard object from save file
 	public static Dashboard load() {
-		//Dashboard d = (Dashboard) ByteCode.loadFromSaveFile("src/main/save/dash_save.ser");
-		Dashboard d = (Dashboard) ByteCode.loadFromSaveFile("dash_save.ser");
-		return d;
+		return (Dashboard) ByteCode.loadFromSaveFile("dash_save.ser");
 	}
 
 	// Launching the application
