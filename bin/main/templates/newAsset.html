@@ -26,6 +26,18 @@
             </form>
         </div>
 
+	<!-- Create a Youtube video asset type -->
+	<div th:case="'video'">
+	  <form action='newyoutube' method='post'>
+	    Name: <input type='text' name='name' required> <br>
+	    Youtube Link: <input type='text' name='link' required> <br>
+	    Size x: <input type='number' name='xsize' required>
+	    y: <input type='number' name='ysize' required> <br>
+
+	    <input type='submit' name='submit'>
+	  </form>
+	</div>
+
         <!-- Create an list asset type -->
         <div th:case="'list'">
             <form action='newlist' method='post'>

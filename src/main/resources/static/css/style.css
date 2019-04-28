@@ -27,7 +27,7 @@ ul, ol{
     padding: 10px;
 }
 
-input[type="submit"]{
+input[type="submit"], input[type="button"]{
     border-radius: 3px;
     padding: 3px 10px;
     margin: 5px 10px;
@@ -37,11 +37,11 @@ input[type="submit"]{
     border-width: 1px;
 }
 
-input[type="submit"]:hover:enabled{
+input[type="submit"]:hover:enabled, input[type="button"]:hover:enabled{
     background-color: #E1E1E1;
 }
 
-input[type="submit"]:active:enabled{
+input[type="submit"]:active:enabled, input[type="button"]:active:enabled{
     background-color: #C8C8C8;
     border-color: #C8C8C8;
 }
