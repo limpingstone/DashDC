@@ -89,6 +89,17 @@ public class Tile implements Serializable {
         assetList.add((DashboardAsset) image);
     }
 
+    // Creates a new AssetYoutube object
+    // Adds the AssetYoutube to assetList
+    public void addAssetYoutube(int id, String name, String path, int[] size, int[] position) {
+	// Ensures that the video link is in embed format
+	path = path.replace("watch?v=", "embed/");
+	System.out.println(path);
+	// Create asset.
+	AssetYoutube video = new AssetYoutube(id, name, path, size, position);
+	assetList.add((DashboardAsset) video);
+    }
+    
     // Creates a new AssetLink object
     // Adds the AssetLink to assetList
     public void addAssetLink(int id, String name, String path) {
