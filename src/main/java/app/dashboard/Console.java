@@ -53,6 +53,7 @@ public class Console {
         status.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         /* Add the buttons to the panel in order */
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(status);
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(launchDashboardButton);
